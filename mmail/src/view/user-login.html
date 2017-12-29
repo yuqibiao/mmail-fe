@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <%= require('html-loader!./common/head-common.html')  %>
+    <title>用户登录</title>
+</head>
+<body>
+<%= require('html-loader!./common/nav-simple.html')  %>
+<div class="content" >
+    <div class="layout-container">
+        <h1>用户登录</h1>
+        <div class="c">
+            <div class="error-item" id="error-item">
+                <i class="fa fa-minus-circle error-icon"></i>
+                <span class="err-msg">Error</span>
+            </div>
+        <div class="user-item">
+            <label class="user-label" for="username">
+                <i class="fa fa-user"></i>
+            </label>
+            <input id="username" name="username" type="text" placeholder="用户名" autocomplete="off">
+        </div>
+        <div class="user-item">
+            <label class="user-label" for="password">
+                <i class="fa fa-lock"></i>
+            </label>
+            <input  id="password" name="password" type="password" placeholder="密　码" autocomplete="off">
+        </div>
+        <div>
+            <button id="submit" class="btn btn-submit">登录</button>
+        </div>
+        <div class="other-options">
+            <a class="link" href="#">忘记密码</a>
+            <a class="link" href="#">免费注册</a>
+        </div>
+        </div>
+    </div>
+</div>
+<%= require('html-loader!./common/footer.html')  %>
+</body>
+</html>
