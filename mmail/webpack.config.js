@@ -25,6 +25,7 @@ var config = {
         'common': ['./src/page/common/common.js'],
         'user-login': ['./src/page/user-login/user-login.js'],
         'user-register': ['./src/page/user-register/user-register.js'],
+        'main': ['./src/page/main/main.js'],
     },
     output: {
         path: './dist',
@@ -54,6 +55,8 @@ var config = {
         new ExtractTextPlugin("css/[name].css"),
         // html模板的处理
         new HtmlWebpackPlugin(getHtmlConfig('user-login', '用户登录')),
+        new HtmlWebpackPlugin(getHtmlConfig('user-register', '用户登录')),
+        new HtmlWebpackPlugin(getHtmlConfig('main', '首页')),
     ]
 };
 

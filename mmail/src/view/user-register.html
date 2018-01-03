@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <%= require('html-loader!./common/head-common.html')  %>
+    <title>用户注册</title>
+</head>
+<body>
+<%= require('html-loader!./common/nav-simple.html')  %>
+
+<div class="content">
+    <div class="layout-container">
+        <h1>用户注册</h1>
+        <div class="c">
+            <div class="error-item" id="error-item">
+                <i class="fa fa-minus-circle error-icon"></i>
+                <span class="err-msg">Error</span>
+            </div>
+            <!--用户名-->
+            <div class="user-item">
+                <label class="user-label" for="username">
+                    <i class="fa fa-user"></i>
+                </label>
+                <input id="username" name="username" type="text" placeholder="请输入用户名" autocomplete="off">
+            </div>
+            <!--密码-->
+            <div class="user-item">
+                <label class="user-label" for="password">
+                    <i class="fa fa-lock"></i>
+                </label>
+                <input id="password" name="password" type="password" placeholder="请输入密码" autocomplete="off">
+            </div>
+            <!--确认密码-->
+            <div class="user-item">
+                <label class="user-label" for="re-password">
+                    <i class="fa fa-lock"></i>
+                </label>
+                <input id="re-password" name="re-password" type="password" placeholder="再次输入密码" autocomplete="off">
+            </div>
+            <!--手机号-->
+            <div class="user-item">
+                <label class="user-label" for="tel">
+                    <i class="fa fa-phone"></i>
+                </label>
+                <input id="tel" name="tel" type="tel" placeholder="请输入手机号" autocomplete="off">
+            </div>
+            <!--邮箱-->
+            <div class="user-item">
+                <label class="user-label" for="email">
+                    <i class="fa fa-envelope"></i>
+                </label>
+                <input id="email" name="email" type="email" placeholder="请输入邮箱" autocomplete="off">
+            </div>
+            <!--密码提示问题-->
+            <div class="user-item">
+                <label class="user-label" for="security-question">
+                    <i class="fa fa-question"></i>
+                </label>
+                <input id="security-question" name="security-question" type="text" placeholder="请输入密码提示问题" autocomplete="off">
+            </div>
+            <!--密码提示问题答案-->
+            <div class="user-item">
+                <label class="user-label" for="security-answer">
+                    <i class="fa fa-key"></i>
+                </label>
+                <input id="security-answer" name="security-answer" type="text" placeholder="请输入密码提示问题答案" autocomplete="off">
+            </div>
+            <div>
+                <button id="submit" class="btn btn-submit">立即注册</button>
+            </div>
+            <div class="other-options">
+                <a class="link" href="user-login.html">已有帐号，去登录>></a>
+            </div>
+        </div>
+    </div>
+</div>
+<%= require('html-loader!./common/footer.html')  %>
+</body>
+</html>

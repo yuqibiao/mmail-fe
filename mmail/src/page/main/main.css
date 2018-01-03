@@ -1,0 +1,147 @@
+/*首页样式*/
+.keywords-list {
+    width: 250px;
+    padding: 10px 0px;
+    background-color: #666;
+    float: left;
+}
+
+.keywords-list .keywords-item {
+    height: 40px;
+    line-height: 40px;
+    padding-left: 10px;
+}
+
+.keywords-list .keywords-item:hover {
+    background-color: #999;
+}
+
+.keywords-list .keywords-item a {
+    font-size: 14px;
+}
+
+.keywords-list .keywords-item a:link {
+    color: #ffffff;
+}
+
+.keywords-list .keywords-item a:visited {
+    color: #ffffff;
+}
+
+.keywords-list .keywords-item a:hover {
+    color: red;
+}
+
+.keywords-list .keywords-item a:active {
+    color: #ffffff;
+}
+
+.slider {
+    width: 820px;
+    height: 420px;
+    margin-left: 10px;
+    float: left;
+    background-color: #666;
+}
+
+.slider .banner {
+    height: 420px;
+    line-height: 420px;
+    background-color: red;
+    text-align: center;
+}
+
+.banner .banner-arrow{
+    position: absolute;
+    width: 30px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    top: 185px;
+    font-size: 30px;
+    color: #fff;
+    background: rgba(0, 0, 0, .2);
+    cursor: pointer;
+}
+
+.banner .banner-arrow:hover{
+    background: rgba(0, 0, 0, .5);
+}
+
+.slider .banner  .prev {
+    right: 0px;
+}
+
+.slider .banner  .next {
+    left: 0px;
+}
+
+.floor-wrap .floor-list {
+    overflow: hidden;
+}
+
+.floor-wrap .floor-item {
+    float: left;
+}
+
+.floor-wrap .floor-title {
+    height: 50px;
+    line-height: 50px;
+    font-size: 20px;
+}
+
+.floor-wrap:nth-child(1) .floor-title {
+    color: #d58717;
+    border-bottom: 1px solid #d58717;
+}
+
+.floor-wrap:nth-child(2) .floor-title {
+    color: #3b838c;
+    border-bottom: 1px solid #3b838c;
+}
+
+.floor-wrap:nth-child(3) .floor-title {
+    color: #a93931;
+    border-bottom: 1px solid #a93931;
+}
+
+.floor-wrap:nth-child(4) .floor-title {
+    color: #488bad;
+    border-bottom: 1px solid #488bad;
+}
+
+.floor-wrap:nth-child(5) .floor-title {
+    color: #642663;
+    border-bottom: 1px solid #642663;
+}
+
+.floor-wrap .floor-item {
+    width: 200px;
+    height: 220px;
+    background: #fff;
+    margin: 15px 20px 15px 0;
+    position: relative;
+}
+
+.floor-wrap .floor-item:last-child {
+    margin: 15px 0px;
+}
+
+.floor-wrap .floor-item a {
+}
+
+.floor-wrap .floor-item .floor-text {
+    left: 10px;
+    top: 10px;
+    font-size: 16px;
+    color: #555;
+    position: absolute;
+}
+
+.floor-wrap .floor-item .floor-img {
+    position: absolute;
+    right: 15px;
+    bottom: 10px;
+    width: 80%;
+    height: 75%;
+}

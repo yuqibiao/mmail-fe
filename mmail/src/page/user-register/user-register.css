@@ -1,3 +1,86 @@
-.register{
-    background-color: aqua;
+/**
+用户注册界面样式
+*/
+.content{
+    width: 100%;
+    padding-bottom: 50px;
+    padding-top: 50px;
+    background-color: #E72955;
+}
+
+.content .layout-container{
+    width: 400px;
+    margin: 0px auto;
+    padding: 10px 0px 0px 0px ;
+    background-color: #fff;
+    border: 1px solid #ddd;
+}
+
+.content .layout-container h1{
+    text-align: center;
+    line-height: 20px;
+    font-weight: bold;
+    font-size: 18px;
+    color: #666666;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.content .layout-container .c{
+    padding: 20px;
+}
+
+.content .error-item{
+    padding: 5px;
+    margin-bottom: 10px;
+    color:  #E72955;
+    border: 1px solid#E72955 ;
+    background: #fde9e9;
+    display: none;
+}
+.content .error-item i{
+    margin-right: 10px;
+}
+
+.content .layout-container .user-item{
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.content .layout-container .user-item input{
+    padding: 10px 0 10px 50px;
+    width: 308px;
+    height: 18px;
+    line-height: 18px;
+    font-size: 15px;
+    border: 1px solid #bdbdbd;
+    outline: none;
+}
+
+.content .layout-container .user-item label{
+    position: absolute;
+    left: 1px;
+    top: 1px;
+    bottom: 1px;
+    width: 40px;
+    line-height: 36px;
+    background: #f3f3f3;
+    font-size: 18px;
+    color: #d3d3d3;
+    text-align: center;
+    border-right: 1px solid #bdbdbd;
+}
+.content .btn-submit{
+    width: 360px;
+}
+
+.content .other-options{
+    margin-top: 10px;
+    text-align: right;
+}
+
+.content .other-options a{
+    margin-left: 10px;
+    color: #999;
+    text-decoration: none;
 }

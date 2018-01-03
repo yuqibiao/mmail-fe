@@ -1,0 +1,15 @@
+<div class="banner">
+    <ul>
+        <li>This is a slide1.</li>
+        <li>This is another slide1.</li>
+        <li>This is a final slide.</li>
+    </ul>
+    <!--前一页-->
+        <div class="banner-arrow prev">
+            <i class="fa fa-angle-left"></i>
+        </div>
+        <!--下一页-->
+        <div class="banner-arrow next">
+            <i class="fa fa-angle-right"></i>
+        </div>
+</div>

@@ -1,0 +1,26 @@
+.operation{
+    height: 30px;
+    line-height: 30px;
+    background:  #eee;
+}
+
+.operation .w{
+    position: relative;
+}
+
+.operation .w .user-sate{
+    position: relative;
+}
+.operation .w .user-sate li{
+    float: left;
+    margin-right: 10px;
+}
+
+.operation .w .user-info{
+    position: relative;
+    right: 0px;
+}
+.operation .w .user-info li{
+    float: right;
+    margin-left: 10px;
+}

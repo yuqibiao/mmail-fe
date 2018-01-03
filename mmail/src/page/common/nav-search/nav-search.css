@@ -1,0 +1,38 @@
+/*
+nav-search样式
+*/
+.search {
+    height: 100px;
+    line-height: 100px;
+    font-size: 0px;
+}
+
+.search .logo {
+    font-size: 28px;
+    font-weight: bold;
+    margin: 0 80px;
+    vertical-align: middle;
+}
+
+.search .logo:link,
+.search .logo:visited,
+.search .logo:hover,
+.search .logo:active {
+    color: #c60023;
+}
+
+.search input {
+    margin: 0px;
+    width: 550px;
+    height: 40px;
+    padding-left: 10px;
+    line-height: 40px;
+    border: 2px solid #c60023;
+    vertical-align: middle;
+    outline: none;
+}
+
+.search .btn-search {
+    height: 44px;
+    width: 80px;
+}
