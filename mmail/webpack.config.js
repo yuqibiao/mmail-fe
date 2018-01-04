@@ -26,6 +26,8 @@ var config = {
         'user-login': ['./src/page/user-login/user-login.js'],
         'user-register': ['./src/page/user-register/user-register.js'],
         'main': ['./src/page/main/main.js'],
+        'goods-list': ['./src/page/goods-list/goods-list.js'],
+        'goods-detail': ['./src/page/goods-detail/goods-detail.js'],
     },
     output: {
         path: './dist',
@@ -42,7 +44,10 @@ var config = {
     resolve: {
         alias: {
             node_modules: __dirname + '/node_modules',
-            util: __dirname + '/src/utils',
+            utils: __dirname + '/src/utils',
+            page:__dirname + '/src/page',
+            common:__dirname + '/src/page/common',
+            image : __dirname + '/src/image',
         }
     },
     plugins: [
@@ -57,6 +62,8 @@ var config = {
         new HtmlWebpackPlugin(getHtmlConfig('user-login', '用户登录')),
         new HtmlWebpackPlugin(getHtmlConfig('user-register', '用户登录')),
         new HtmlWebpackPlugin(getHtmlConfig('main', '首页')),
+        new HtmlWebpackPlugin(getHtmlConfig('goods-list'),'商品展示'),
+        new HtmlWebpackPlugin(getHtmlConfig('goods-detail'),'商品详情'),
     ]
 };
 

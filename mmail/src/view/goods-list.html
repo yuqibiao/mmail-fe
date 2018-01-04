@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <%= require('html-loader!./common/head-common.html') %>
+    <title>商品展示</title>
+</head>
+<body>
+<%= require('html-loader!./common/nav-operation.html') %>
+<%= require('html-loader!./common/nav-search.html') %>
+<div class="crumb">
+    <div class="w">
+        <a href="#" class="link">MMail</a>
+        <span>&gt;</span>
+        <a href="#" class="link">商品列表</a>
+    </div>
+</div>
+<div class="w">
+    <ul class="sort-con">
+        <li class="sort-item active" data-type="default"><span>推荐排序</span>
+        </li>
+        <li class="sort-item asc " data-type="price"><span>价格</span>
+            <i class="fa fa-sort-asc"></i>
+            <i class="fa fa-sort-desc"></i>
+        </li>
+    </ul>
+    <ul class="p-list-con">
+    </ul>
+</div>
+<%= require('html-loader!./common/footer.html') %>
+</body>
+</html>

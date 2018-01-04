@@ -3,10 +3,10 @@
  * on 2018/1/2.
  */
 require('./main.css');
-require('../common/nav-operation/nav-operation.js');
-require('../common/nav-search/nav-search.js');
-require('../../utils/plugin/slider/slider');
-var _mm = require('util/mm.js')
+require('common/nav-operation/nav-operation.js');
+require('common/nav-search/nav-search.js');
+require('utils/plugin/slider/slider');
+var _mm = require('utils/mm.js')
 var templateBanner  = require('./banner.string');
 
 

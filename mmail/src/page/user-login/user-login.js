@@ -3,7 +3,7 @@
  * on 2017/12/29.
  */
 require('./user-login.css');
-var _mm= require('util/mm.js');
+var _mm= require('utils/mm.js');
 
 /*表单错误提示*/
 var formError = {

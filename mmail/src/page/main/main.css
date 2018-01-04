@@ -123,6 +123,10 @@
     position: relative;
 }
 
+.floor-wrap .floor-item:hover{
+    box-shadow: 1px 1px 7px #ddd;
+}
+
 .floor-wrap .floor-item:last-child {
     margin: 15px 0px;
 }

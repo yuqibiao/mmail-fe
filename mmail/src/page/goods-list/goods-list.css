@@ -1,0 +1,109 @@
+/*
+商品展示页样式
+*/
+.crumb {
+    height: 50px;
+    line-height: 50px;
+    background-color: #eee;
+    color: #888;
+    border-top: #c60023 solid 2px;
+}
+
+.sort-con {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    overflow: hidden;
+}
+
+.sort-con .sort-item {
+    border: 1px #666 solid;
+    float: left;
+    padding: 2px 5px;
+    margin-right: 5px;
+    cursor: pointer;
+    position: relative;
+}
+
+.sort-con .sort-item:hover {
+    border: 1px #c60023 solid;
+}
+
+.sort-con .active {
+    background-color: #c60023;
+    color: #fff;
+    border: 1px #c60023 solid;
+}
+
+.sort-con .sort-item .fa-sort-desc {
+    position: absolute;
+    top: 8px;
+    right: 5px;
+}
+
+.sort-con .sort-item.asc .fa-sort-desc {
+    opacity: 0.6;
+}
+
+.sort-con .sort-item.desc .fa-sort-asc {
+    opacity: 0.6;
+}
+
+.p-list-con {
+    margin-right: -20px;
+    overflow: hidden;
+}
+.p-list-con .p-item{
+    position: relative;
+    width: 180px;
+    padding: 10px;
+    margin: 0 20px 20px 0;
+    float: left;
+    cursor: pointer;
+    background: #fff;
+    transition: box-shadow .5s ease;
+}
+
+.p-list-con .p-item:hover{
+    box-shadow: 1px 1px 7px #ddd;
+}
+
+.p-list-con .p-item:nth-child(5n+0){
+    /*margin: 0 0 20px 0;*/
+}
+
+.p-list-con .p-item .p-img-con{
+    width: 180px;
+    height: 200px;
+}
+
+.p-list-con .p-item .p-img-con .p-img{
+    width: 100%;
+    height: 100%;
+}
+
+.p-list-con .p-item .p-price-con .p-price{
+    font-size: 16px;
+    color: #e7380d;
+}
+
+.p-list-con .p-item .p-name-con{
+    height: 40px;
+    overflow: hidden;
+}
+
+.p-list-con .p-item .p-name-con .p-name{
+    line-height: 20px;
+    margin-bottom: 10px;
+    color: #666;
+    text-decoration: none;
+}
+
+.err-tip{
+    height: 60px;
+    line-height: 60px;
+    color: #f60;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    background: #eee;
+}

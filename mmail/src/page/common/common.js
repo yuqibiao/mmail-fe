@@ -11,7 +11,7 @@ require('./header/header.css');
 
 /*引入另外一个js文件 util-->/src/utils
 别名在webpack.config文件中配置*/
-var _mm     = require('util/mm.js');
+var _mm     = require('utils/mm.js');
 function test() {
     console.log("========common.js===");
     _mm.errorTips("common.js");
