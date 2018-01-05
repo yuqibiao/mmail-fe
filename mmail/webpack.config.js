@@ -28,6 +28,7 @@ var config = {
         'main': ['./src/page/main/main.js'],
         'goods-list': ['./src/page/goods-list/goods-list.js'],
         'goods-detail': ['./src/page/goods-detail/goods-detail.js'],
+        'goods-cart': ['./src/page/goods-cart/goods-cart.js'],
     },
     output: {
         path: './dist',
@@ -64,6 +65,7 @@ var config = {
         new HtmlWebpackPlugin(getHtmlConfig('main', '首页')),
         new HtmlWebpackPlugin(getHtmlConfig('goods-list'),'商品展示'),
         new HtmlWebpackPlugin(getHtmlConfig('goods-detail'),'商品详情'),
+        new HtmlWebpackPlugin(getHtmlConfig('goods-cart'),'购物车'),
     ]
 };
 

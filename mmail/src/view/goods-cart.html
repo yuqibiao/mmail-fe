@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <%= require('html-loader!./common/head-common.html') %>
+    <title>购物车</title>
+</head>
+<body>
+<%= require('html-loader!./common/nav-operation.html') %>
+<%= require('html-loader!./common/nav-search.html') %>
+
+<div class="crumb">
+    <div class="w">
+        <a href="#" class="link">MMail</a>
+        <span>&gt;</span>
+        <a href="#" class="link">我的购物车</a>
+    </div>
+</div>
+
+<div class="w cart-wrap">
+    <!--header-->
+    <div class="cart-header">
+        <table class="cart-table">
+            <tbody>
+            <tr>
+                <td class="cart-cell cell-check">
+                    <label>
+                        <input type="checkbox" checked="checked">
+                        <span>全选</span>
+                    </label>
+                </td>
+                <td class="cart-cell cell-info">商品信息</td>
+                <td class="cart-cell cell-price">单价</td>
+                <td class="cart-cell cell-count">数量</td>
+                <td class="cart-cell cell-total">合计</td>
+                <td class="cart-cell cell-operate">操作</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!--goods item list -->
+    <div class="goods-list">
+        <table class="cart-table">
+            <tbody>
+            <tr class="cart-cell">
+                <td class="cart-cell cell-check"><input type="checkbox" checked></td>
+                <td class="cart-cell cell-img ">
+                    <a href="./detail.html?productId=69" target="_blank">
+                        <img class="p-img" src="http://img.happymmall.com/f3ea5e57-6717-433a-8004-b3d5fabc17f9.jpg" alt="Apple/苹果 iPhone X">
+                    </a>
+                </td>
+                <td class="cart-cell cell-info">
+                    <a class="link p-name" href="./detail.html?productId=69" target="_blank">Apple/苹果 iPhone X</a>
+                </td>
+                <td class="cart-cell cell-price">￥8388</td>
+                <td class="cart-cell cell-count">
+                    <span class="count-btn" data-opera-type="minus">-</span>
+                    <input class="count-input" data-max="999985" value="5">
+                    <span class="count-btn" data-opera-type="plus">+</span>
+                </td>
+                <td class="cart-cell cell-total">￥41940</td>
+                <td class="cart-cell cell-operate">
+                    <a class="link cart-delete">删除</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!--footer-->
+    <div class="cart-footer">
+        <label>
+            <input type="checkbox" checked="checked">
+            <span>全选</span>
+        </label>
+        <a class="link delete-opr" href="#">
+            <i class="fa fa-trash-o"></i>
+            <span>删除选中</span>
+        </a>
+        <div class="submit-con">
+            <span>总价：</span>
+            <span class="price">￥53932</span>
+            <button class="btn btn-submit">去结算</button>
+        </div>
+    </div>
+</div>
+
+<%= require('html-loader!./common/footer.html') %>
+</body>
+</html>

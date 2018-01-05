@@ -77,7 +77,7 @@ input[type='checkbox']{
     padding: 0 20px;
     height: 40px;
     line-height: 40px;
-    vertical-align: middle;
+   /* vertical-align: middle;*/
     border: none;
     background: #c60023;
     font-size: 17px;

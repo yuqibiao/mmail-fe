@@ -1,0 +1,133 @@
+/*
+购物车页样式
+*/
+.crumb {
+    height: 50px;
+    line-height: 50px;
+    background-color: #eee;
+    color: #888;
+    border-top: #c60023 solid 2px;
+}
+
+.cart-wrap {
+    margin-top: 15px;
+}
+
+.cart-table {
+    padding-left: 20px;
+    width: 100%;
+}
+
+.cart-header {
+    height: 50px;
+    line-height: 50px;
+    background-color: #eee;
+}
+
+.cart-header .cart-cell {
+    height: 50px;
+    text-align: left;
+}
+
+.cart-header .cell-check {
+    width: 16%;
+}
+
+.cart-header .cell-info {
+    width: 35%;
+}
+
+.cart-table .cell-price {
+    width: 10%;
+}
+
+.cart-table .cell-count {
+    width: 15%;
+}
+
+.cart-table .cell-total {
+    width: 14%;
+}
+
+.cart-table .cell-operate {
+    width: 10%;
+}
+
+.goods-list .cart-table {
+    margin-top: 15px;
+    border: 1px solid #eee;
+}
+
+.goods-list .cart-table :hover {
+    box-shadow: 1px 1px 7px #eee;
+}
+
+.goods-list .cell-check {
+    width: 6%;
+}
+
+.goods-list .cell-img {
+    width: 10%;
+}
+
+.goods-list .p-img {
+    height: 80px;
+    border: 1px solid #ddd;
+}
+
+.goods-list .cart-cell {
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.goods-list .cart-cell .count-input {
+    width: 60px;
+    height: 28px;
+    border: 1px solid #ddd;
+    outline: none;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.goods-list .cart-cell .count-btn {
+    width: 20px;
+    height: 28px;
+    line-height: 28px;
+    border: 1px solid #ddd;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    display: inline-block;
+}
+
+/*底部*/
+.cart-footer {
+    height: 50px;
+    line-height: 50px;
+    padding-left: 20px;
+    margin-top: 20px;
+    background-color: #eee;
+}
+
+.delete-opr {
+    margin-left: 10px;
+}
+
+.submit-con {
+    height: 50px;
+    padding: 0;
+    float: right;
+}
+
+.submit-con .price {
+    font-size: 18px;
+    color: #c60023;
+    margin-right: 15px;
+}
+
+.submit-con .btn-submit {
+    margin: 0;
+    height: 50px;
+    line-height: 50px;
+    outline: none;
+}
