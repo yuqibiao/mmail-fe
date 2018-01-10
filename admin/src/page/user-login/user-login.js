@@ -3,17 +3,14 @@
  * Created by yu
  * on 2018/1/8.
  */
-
-require('./user-login.css');
-var layui_form = require('node_modules/layui-src/dist/lay/modules/form.js');
-
+require('./user-login.css')
 layui.config({
-    base: layui_form
-}).use('form', function () {
-    var form = layui.form;
-    //监听提交
-    form.on('submit(login)', function (data) {
-        layer.msg(JSON.stringify(data.field));
+}).use(['form','layer'],function(){
+    var form = layui.form();
+
+    //登录按钮事件
+    form.on("submit(login)",function(data){
+
         return false;
-    });
-});
+    })
+})

@@ -55,7 +55,8 @@ var config = {
         // 独立通用模块到js/base.js
         new webpack.optimize.CommonsChunkPlugin({
             name : 'common',
-            filename : 'js/base.js'
+            filename : 'js/base.js',
+            minChunks: 2
         }),
         // 把css单独打包到文件里
         new ExtractTextPlugin("css/[name].css"),
