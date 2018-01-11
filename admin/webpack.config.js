@@ -25,6 +25,7 @@ var config = {
     entry: {
         'common': ['./src/page/common/common.js'],
         'user-login': ['./src/page/user-login/user-login.js'],
+        'index': ['./src/page/index/index.js'],
     },
     output: {
         path: './dist',
@@ -62,6 +63,7 @@ var config = {
         ]),
         // html模板的处理
         new HtmlWebpackPlugin(getHtmlConfig('user-login', '用户后台登录')),
+        new HtmlWebpackPlugin(getHtmlConfig('index', '后台管理')),
     ]
 };
 
