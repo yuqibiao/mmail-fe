@@ -91,9 +91,20 @@ index.html对应css
     color: #fff;
 }
 
-.top_menu.layui-nav .layui-nav-child a:hover, .closeBox.layui-nav .layui-nav-child a:hover {
-    color: #fff;
-    background-color: #5FB878;
+.layui-nav-tree .layui-nav-itemed > a {
+    background-color: #4E5465 !important;
+}
+
+.layui-nav-tree .layui-nav-child a:hover {
+    background-color: #4E5465;
+}
+
+.layui-nav-tree .layui-nav-child a {
+    background-color: #2B2E37;
+}
+
+.layui-nav-tree .layui-nav-child dd.layui-this a {
+    background-color: #009688;
 }
 
 .top_menu .iconfont {
@@ -116,6 +127,7 @@ index.html对应css
 /*左侧边栏*/
 .layui-side {
     width: 200px;
+    left: 0;
 }
 
 .layui-side-scroll {
@@ -136,6 +148,7 @@ index.html对应css
     margin: 0 auto;
     display: block;
 }
+
 .layui-side .user-photo img {
     display: block;
     width: 100%;
@@ -151,7 +164,137 @@ index.html对应css
     color: #fff;
 }
 
+.layui-side cite {
+    margin-left: 8px;
+}
 
+/*样式改变的过渡*/
+.layui-body,
+.layui-layout-admin .layui-side{
+    transition: all 0.3s ease-in-out;
+    -webkit-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -ms-transition: all 0.3s ease-in-out;
+}
+
+.showMenu.layui-layout-admin .layui-side {
+    left: -200px;
+}
+
+.showMenu .layui-body,
+.showMenu .layui-footer {
+    left: 0px;
+}
+
+/*右侧内容区域*/
+/*右侧body*/
+#top_tabs_box {
+    padding-right: 138px;
+    height: 40px;
+    border-bottom: 1px solid #e2e2e2;
+}
+
+#top_tabs {
+    position: absolute;
+    border-bottom: none;
+}
+
+/*多窗口页面操作下拉*/
+/*多窗口页面操作下拉*/
+.closeBox {
+    position: absolute;
+    right: 0;
+    background-color: #fff !important;
+    color: #000;
+    border-left: 1px solid #e2e2e2;
+    border-bottom: 1px solid #e2e2e2;
+}
+
+.closeBox .layui-nav-item {
+    line-height: 40px;
+}
+
+.closeBox .layui-nav-item a, .closeBox .layui-nav-item a:hover {
+    color: #000;
+}
+
+.closeBox .layui-nav-more {
+    top: 17px;
+}
+
+.closeBox .layui-nav-mored {
+    top: 11px;
+}
+
+.closeBox .layui-nav-child {
+    top: 42px;
+    left: -12px;
+}
+
+.closeBox .layui-nav-bar {
+    display: none;
+}
+
+.closeBox .icon-caozuo {
+    font-size: 20px;
+    position: absolute;
+    top: 1px;
+    left: -2px;
+}
+
+.layui-body {
+    overflow: hidden;
+    border-top: 5px solid #1AA094;
+    border-left: 2px solid #1AA094;
+}
+
+.layui-tab {
+    margin: 0;
+}
+
+.layui-tab-content {
+    height: 100%;
+    padding: 0;
+}
+
+.layui-tab-item {
+    position: absolute;
+    top: 41px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 0;
+    margin: 0;
+    -webkit-overflow-scrolling: touch;
+    overflow: auto;
+}
+
+.layui-tab-title .layui-this {
+    background-color: #1AA094;
+    color: #fff;
+}
+
+.layui-tab-title .layui-this:after {
+    border: none;
+}
+
+.layui-tab-title li cite {
+    font-style: normal;
+    padding-left: 5px;
+}
+
+.clildFrame.layui-tab-content {
+    padding-right: 0;
+}
+
+.clildFrame.layui-tab-content iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    min-width: 320px;
+    position: absolute;
+}
 
 /*响应式*/
 @media screen and (max-width: 1282px) {
