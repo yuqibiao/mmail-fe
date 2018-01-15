@@ -27,15 +27,21 @@
 		{
 			"title" : "404页面",
 			"icon" : "&#xe61c;",
-			"href" : "page/404.html",
+			"href" : "",
 			"spread" : false
 		},
 		{
-			"title" : "登录",
+			"title" : "子菜单中的菜单",
 			"icon" : "&#xe609;",
-			"href" : "page/login/login.html",
+			"href" : "",
 			"spread" : false,
-			"target" : "_blank"
+			"children" : [
+				{
+					"title" : "403页面",
+					"icon" : "&#xe61c;",
+					"href" : "",
+					"spread" : false
+				}]
 		}
 	]
 }]
