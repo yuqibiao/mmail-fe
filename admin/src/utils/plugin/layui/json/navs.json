@@ -1,47 +1,146 @@
-[{
-	"title" : "后台首页",
-	"icon" : "icon-computer",
-	"href" : "page/main.html",
-	"spread" : false
-},{
-	"title" : "文章列表",
-	"icon" : "icon-text",
-	"href" : "page/news/newsList.html",
-	"spread" : false
-},{
-	"title" : "友情链接",
-	"icon" : "&#xe64c;",
-	"href" : "page/links/linksList.html",
-	"spread" : false
-},{
-	"title" : "系统基本参数",
-	"icon" : "&#xe631;",
-	"href" : "page/systemParameter/systemParameter.html",
-	"spread" : false
-},{
-	"title" : "其他页面",
-	"icon" : "&#xe630;",
-	"href" : "",
-	"spread" : false,
-	"children" : [
-		{
-			"title" : "404页面",
-			"icon" : "&#xe61c;",
-			"href" : "",
-			"spread" : false
-		},
-		{
-			"title" : "子菜单中的菜单",
-			"icon" : "&#xe609;",
-			"href" : "",
-			"spread" : false,
-			"children" : [
-				{
-					"title" : "403页面",
-					"icon" : "&#xe61c;",
-					"href" : "",
-					"spread" : false
-				}]
-		}
-	]
-}]
+[
+	{
+		"checked": false,
+		"id": "12",
+		"isParent": true,
+		"title": "基本元素",
+		"open": false,
+		"pId": "",
+		"href": " ",
+		"icon": "fa-cubes"
+	},
+	{
+		"checked": false,
+		"id": "14",
+		"isParent": false,
+		"title": "按钮",
+		"open": false,
+		"pId": "12",
+		"href": "www.baidu,com",
+		"icon": "&#xe641;"
+	},
+	{
+		"checked": false,
+		"id": "15",
+		"isParent": false,
+		"title": "表单",
+		"open": false,
+		"pId": "12",
+		"href": "table.html",
+		"icon": "&#xe63c;"
+	},
+	{
+		"checked": false,
+		"id": "16",
+		"isParent": false,
+		"title": "导航",
+		"open": false,
+		"pId": "12",
+		"href": "nav.html",
+		"icon": "&#xe63c;"
+	},
+	{
+		"checked": false,
+		"id": "18",
+		"isParent": false,
+		"title": "Tab选项卡",
+		"open": false,
+		"pId": "12",
+		"href": "tab.html",
+		"icon": "&#xe62a;"
+	},
+	{
+		"id": "19",
+		"isParent": false,
+		"title": "辅助性元素",
+		"icon": "&#xe60c;",
+		"pId": "12",
+		"href": "auxiliar.html"
+	},
+	{
+		"checked": false,
+		"id": "20",
+		"isParent": true,
+		"title": "组件",
+		"open": false,
+		"pId": "",
+		"href": "",
+		"icon": "fa-cogs"
+	},
+	{
+		"checked": false,
+		"id": "21",
+		"isParent": false,
+		"title": "Datatable",
+		"open": false,
+		"pId": "20",
+		"href": "begtable.html",
+		"icon": "fa-table"
+	},
+	{
+		"checked": false,
+		"id": "22",
+		"isParent": false,
+		"title": "Navbar组件",
+		"open": false,
+		"pId": "20",
+		"href": "begtable.html",
+		"icon": "fa-navicon"
+	},
+	{
+		"id": "23",
+		"title": "第三方组件",
+		"icon": "&#x1002;",
+		"isParent": true,
+		"pId": "20",
+		"href": ""
+	},
+	{
+		"id": "24",
+		"title": "iCheck组件",
+		"icon": "fa-check-square-o",
+		"href": "icheck.html",
+		"pId": "23"
+	},
+	{
+		"id": "25",
+		"title": "地址本",
+		"isParent": true,
+		"icon": "fa-address-book",
+		"href": "",
+		"pId": ""
+	},
+	{
+		"id": "26",
+		"title": "Github",
+		"icon": "fa-github",
+		"href": "https://www.github.com/",
+		"pId": "25"
+	}, {
+	"id": "27",
+	"title": "QQ",
+	"icon": "fa-qq",
+	"href": "http://www.qq.com/",
+	"pId": "25"
+}, {
+	"id": "28",
+	"title": "Fly社区",
+	"icon": "&#xe609;",
+	"href": "http://fly.layui.com/",
+	"pId": "25"
+}, {
+	"id": "29",
+	"title": "新浪微博",
+	"icon": "fa-weibo",
+	"href": "http://weibo.com/",
+	"pId": "25"
+},
+	{
+		"id": "30",
+		"title": "这是一级导航",
+		"icon": "fa-stop-circle",
+		"href": "https://www.baidu.com",
+		"pId": ""
+	}
+
+]

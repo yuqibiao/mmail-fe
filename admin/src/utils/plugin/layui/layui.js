@@ -11,7 +11,9 @@
     }(), r = function (t) {
         e.console && console.error && console.error("Layui hint: " + t)
     }, l = "undefined" != typeof opera && "[object Opera]" === opera.toString(), a = {
-        bodyTab: "modules/custom/bodyTab",
+        common: "modules/custom/common",
+        navbar: "modules/custom/navbar",
+        tab: "modules/custom/tab",
         layer: "modules/layer",
         laydate: "modules/laydate",
         laypage: "modules/laypage",
