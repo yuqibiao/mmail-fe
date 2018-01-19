@@ -25,6 +25,7 @@ var config = {
     entry: {
         'common': ['./src/page/common/common.js'],
         'user-login': ['./src/page/user-login/user-login.js'],
+        'user-list': ['./src/page/user-list/user-list.js'],
         'index': ['./src/page/index/index.js'],
     },
     output: {
@@ -63,6 +64,7 @@ var config = {
         ]),
         // html模板的处理
         new HtmlWebpackPlugin(getHtmlConfig('user-login', '用户后台登录')),
+        new HtmlWebpackPlugin(getHtmlConfig('user-list', '用户信息管理')),
         new HtmlWebpackPlugin(getHtmlConfig('index', '后台管理')),
     ]
 };

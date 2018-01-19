@@ -13,10 +13,10 @@
 		"checked": false,
 		"id": "14",
 		"isParent": false,
-		"title": "按钮",
+		"title": "用户管理",
 		"open": false,
 		"pId": "12",
-		"href": "www.baidu,com",
+		"href": "user-list.html",
 		"icon": "&#xe641;"
 	},
 	{

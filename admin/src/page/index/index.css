@@ -297,6 +297,18 @@ index.html对应css
     position: absolute;
 }
 
+/*footer*/
+.layui-layout-admin .layui-footer{
+    height: auto;
+}
+.layui-footer .layui-main{
+    height: auto;
+    padding: 5px 0;
+    line-height: 33px;
+    border: none;
+    text-align: center;
+}
+
 /*响应式*/
 @media screen and (max-width: 1282px) {
     .panel {

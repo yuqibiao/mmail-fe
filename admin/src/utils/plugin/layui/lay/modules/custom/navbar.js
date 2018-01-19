@@ -9,7 +9,7 @@ layui.define(['element', 'common'], function (exports) {
 
     var Navbar = function () {
 		/**
-		 *  默认配置 
+		 *  默认配置
 		 */
         this.config = {
             elem: undefined, //容器
@@ -160,11 +160,13 @@ layui.define(['element', 'common'], function (exports) {
                                 if (!menuObj.isParent){
                                     callback(data);
                                 }
+                                return false;
                             });
                         });
                     } else {
                         $this.on('click', function () {
                             var $a = $this.children('a');
+                            var menuObj = $a.data("menuObj")
                             var href = $a.data('url');
                             var icon = $a.children('i:first').data('icon');
                             var title = $a.children('cite').text();
@@ -175,7 +177,7 @@ layui.define(['element', 'common'], function (exports) {
                                     icon: icon,
                                     title: title
                                 }
-                            }
+                            };
                             callback(data);
                         });
                     }
@@ -225,7 +227,7 @@ layui.define(['element', 'common'], function (exports) {
             var item = parentMenus[i];
             var $li = $('<li class="layui-nav-item">');
             var $a = $('<a href="javascript:;" data-url="' + item.href + '">');
-            //hover($a);
+            hover($a);
             $a.data("menuObj", item);
             if(item.icon!==undefined && item.icon!==''){
                 if (item.icon.indexOf('fa-')!==-1){
@@ -236,6 +238,7 @@ layui.define(['element', 'common'], function (exports) {
             }
             var $title = $('<cite>' + item.title + '</cite>');
             $a.append($title);
+            $a.append('<span class ="nav-indicate">');
             $li.append($a);
             $menu.append($li);
             if(item.isParent){
@@ -261,7 +264,7 @@ layui.define(['element', 'common'], function (exports) {
             var childItem = childMenus[i];
             var $dd = $('<dd></dd>');
             var $a = $('<a href="javascript:;" data-url="' + childItem.href + '" >' );
-            //hover($a);
+            hover($a);
             var $dl = $('<dl class="layui-nav-child">');
             $a.data("menuObj", childItem);
             if(childItem.icon!==undefined && childItem.icon!==''){
@@ -273,6 +276,7 @@ layui.define(['element', 'common'], function (exports) {
             }
             var $title = $('<cite>' + childItem.title + '</cite>');
             $a.append($title);
+            $a.append('<span class ="nav-indicate">');
             $dd.append($a);
             $dl.append($dd);
             a.parent().append($dl);
@@ -318,19 +322,25 @@ layui.define(['element', 'common'], function (exports) {
     function clickMenu(a){
         //$(a).parent().toggleClass("layui-nav-itemed");
         var menuObj = $(a).data("menuObj");
-        var next = (a).next();
-        if($(next).hasClass("layui-nav-child-show")){
-            $(next).removeClass("layui-nav-child-show");
-            $(next).addClass("layui-nav-child-hide") ;
-        }else{
-            $(next).removeClass("layui-nav-child-hide");
-            $(next).addClass("layui-nav-child-show");
-        }
-        var sapn = $(a).children("span");
-        if ($(sapn).hasClass("layui-nav-down")) {
-            $(sapn).addClass( "layui-nav-more");
-        } else {
-            $(sapn).addClass("layui-nav-down") ;
+        var $dd = $(a).parent("dd");
+        if (menuObj.isParent){
+            if($dd !==undefined){
+                $dd.removeClass("layui-this");
+            }
+            var next = (a).next();
+            if($(next).hasClass("layui-nav-child-show")){
+                $(next).removeClass("layui-nav-child-show");
+                $(next).addClass("layui-nav-child-hide") ;
+            }else{
+                $(next).removeClass("layui-nav-child-hide");
+                $(next).addClass("layui-nav-child-show");
+            }
+            var sapn = $(a).children("span.layui-nav-down");
+            if ($(sapn).hasClass("layui-nav-down")) {
+                $(sapn).addClass( "layui-nav-more");
+            } else {
+                $(sapn).addClass("layui-nav-down") ;
+            }
         }
         //点击的是菜单项
         if(!menuObj.isParent){
@@ -338,21 +348,19 @@ layui.define(['element', 'common'], function (exports) {
         }
     }
 
-/*
     function hover(a){
-        var navSpan = $(a).find(".layui-nav-bar");
         $(a).mouseover(function () {
-            console.log("===over"+this.offsetHeight);
-            navSpan.removeClass(".layui-nav-bar-show");
-            navSpan.addClass("layui-nav-bar-hidden");
+            var navSpan = $(a).find(".nav-indicate");
+            navSpan.removeClass("nav-indicate-hide");
+            navSpan.addClass("nav-indicate-show");
         });
 
         $(a).mouseleave(function () {
-            navSpan.addClass(".layui-nav-bar-show");
-            navSpan.removeClass("layui-nav-bar-hidden");
+            var navSpan = $(a).find(".nav-indicate");
+            navSpan.removeClass("nav-indicate-show");
+            navSpan.addClass("nav-indicate-hide");
         });
 
     }
-*/
 
 });

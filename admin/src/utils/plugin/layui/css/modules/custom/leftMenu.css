@@ -29,24 +29,72 @@
 }
 
 .layui-nav-tree .layui-nav-child dd.layui-this a {
-    background-color: #5FB878 !important;
+    background-color: #009688 !important;
 }
 
 .layui-nav-child dd.layui-this {
     background-color: rgba(0, 0, 0, 0.1) !important;
 }
+
 /*.layui-nav-child dd.layui-this a{
     background-color: #5FB878 !important;
 }*/
 
-layui-nav a:hover{
+/*layui-nav a:hover{
     background-color: #f0f;
-}
+}*/
 
-.layui-nav-child .layui-nav-child-show{
+.layui-nav-child .layui-nav-child-show {
     display: block;
 }
 
-.layui-nav-child .layui-nav-child-hide{
+.layui-nav-child .layui-nav-child-hide {
     display: none;
 }
+
+.nav-indicate {
+    width: 5px;
+    height: 0;
+    display: inline;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background-color: #009688;
+}
+
+.nav-indicate-show {
+    height: 100%;
+    transition: all .2s;
+    -webkit-transition: all .2s;
+}
+
+.nav-indicate-hide {
+    height: 0;
+    transition: all .2s;
+    -webkit-transition: all .2s;
+}
+
+/*右键菜单*/
+.admin-contextmenu {
+    position: absolute;
+    line-height: 36px;
+    padding: 5px 0;
+    border: 1px solid #d2d2d2;
+    background-color: white;
+    z-index: 19940201;
+    border-radius: 2px;
+    white-space: nowrap;
+    top: 30px;
+    /*width: 100px;height: 200px; */
+}
+
+.admin-contextmenu ul li {
+    padding: 0 15px;
+}
+
+.admin-contextmenu ul li:hover {
+    background-color: #eee;
+    cursor: pointer;
+}
+
+

@@ -21,10 +21,10 @@ layui.use(['element', 'layer', 'navbar', 'tab'], function () {
          },*/
         contextMenu: true,
         onSwitch: function (data) {
-            console.log(data.id); //当前Tab的Id
+          /*  console.log(data.id); //当前Tab的Id
             console.log(data.index); //得到当前Tab的所在下标
             console.log(data.elem); //得到当前的Tab大容器
-            console.log(tab.getCurrentTabId())
+            console.log(tab.getCurrentTabId())*/
         },
         closeBefore: function (obj) { //tab 关闭之前触发的事件
             console.log(obj);
@@ -53,7 +53,7 @@ layui.use(['element', 'layer', 'navbar', 'tab'], function () {
     //iframe自适应
     $(window).on('resize', function () {
         var $content = $('.admin-nav-card .layui-tab-content');
-        $content.height($(this).height() - 147);
+        $content.height($(this).height() - 150);
         $content.find('iframe').each(function () {
             $(this).height($content.height());
         });
@@ -63,9 +63,8 @@ layui.use(['element', 'layer', 'navbar', 'tab'], function () {
     navbar.set({
         spreadOne: true,
         elem: '#admin-navbar-side',
-        cached: true,
+        cached: false,
        /* data: navs*/
-        /*cached:true,*/
          url: '../plugin/layui/json/navs.json'
     });
     //渲染navbar
@@ -80,6 +79,16 @@ layui.use(['element', 'layer', 'navbar', 'tab'], function () {
         layer.alert('清除完成!', {icon: 1, title: '系统提示'}, function () {
             location.reload();//刷新
         });
+    });
+
+    $(".refreshThis").click(function () {//刷新当前页
+        tab.refreshThis();
+    });
+    $(".closePageOther").click(function () {//关闭其它页
+        tab.deleteTabOther();
+    });
+    $(".closePageAll").click(function () {//关闭所有页
+        tab.deleteTabAll();
     });
 
 });

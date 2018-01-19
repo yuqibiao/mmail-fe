@@ -89,10 +89,11 @@ layui.define(['element', 'common'], function (exports) {
         });
         return tabId;
     };
-	/**
-	 * 添加选择卡，如果选择卡存在则获取焦点
-	 * @param {Object} data
-	 */
+
+    /**
+     * 添加选择卡，如果选择卡存在则获取焦点
+     * @param {Object} data
+     */
     Tab.prototype.tabAdd = function (data) {
         var that = this;
         var _config = that.config;
@@ -282,6 +283,16 @@ layui.define(['element', 'common'], function (exports) {
             });
         }
     };
+
+    /**
+     * 获取当前获得焦点的tabIndex
+     */
+    Tab.prototype.getCurrentTabIndex = function () {
+        var that = this;
+        var _config = that.config;
+        return $(_config.elem).find('ul.layui-tab-title').children('li.layui-this ') .find("i.layui-tab-close").data('id');
+    };
+
     /**
 	 * 获取当前获得焦点的tabid
 	 */
@@ -289,7 +300,7 @@ layui.define(['element', 'common'], function (exports) {
         var that = this;
         var _config = that.config;
         return $(_config.elem).find('ul.layui-tab-title').children('li.layui-this').attr('lay-id');
-    }
+    };
     /**
 	 * 删除指定的tab选项卡
 	 * @param {String} id
@@ -298,7 +309,48 @@ layui.define(['element', 'common'], function (exports) {
         var that = this;
         element.tabDelete(ELEM.tabFilter, id);
         return that;
-    }
+    };
+
+    /**
+     * 关闭其它页
+     * @param id
+     * @returns {Tab}d
+     */
+    Tab.prototype.deleteTabOther = function () {
+        var currentId = tab.getCurrentTabId();
+        ELEM.titleBox.children('li').each(function () {
+            var $t = $(this);
+            var id1 = $t.attr('lay-id');
+            if (id1 !== currentId && id1 !== undefined && id1 !=='') {
+                element.tabDelete(ELEM.tabFilter, id1);
+            }
+        });
+    };
+
+    /**
+     * 关闭所有
+     * @param id
+     * @returns {Tab}d
+     */
+    Tab.prototype.deleteTabAll = function () {
+        ELEM.titleBox.children('li').each(function () {
+            var $t = $(this);
+            var id1 = $t.attr('lay-id');
+            if ( id1 !== undefined && id1 !=='') {
+                element.tabDelete(ELEM.tabFilter, id1);
+            }
+        });
+    };
+
+    /**
+     * 刷新当前页
+     *
+     */
+    Tab.prototype.refreshThis = function () {
+        var currentIndex = tab.getCurrentTabIndex();
+        var src = ELEM.contentBox.find('iframe[data-id=' + currentIndex + ']')[0].src;
+        ELEM.contentBox.find('iframe[data-id=' + currentIndex + ']')[0].src = src;
+    };
 
     var tab = new Tab();
     exports(mod_name, function (options) {

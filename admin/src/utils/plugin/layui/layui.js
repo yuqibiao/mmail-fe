@@ -14,6 +14,7 @@
         common: "modules/custom/common",
         navbar: "modules/custom/navbar",
         tab: "modules/custom/tab",
+        paging: "modules/custom/paging",
         layer: "modules/layer",
         laydate: "modules/laydate",
         laypage: "modules/laypage",
