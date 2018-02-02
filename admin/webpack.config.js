@@ -9,6 +9,9 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var CopyWebpackPlugin = require('copy-webpack-plugin');
 
+// 环境变量, dev, (test), online
+var WEBPACK_ENV            = process.env.WEBPACK_ENV || 'dev';
+
 // 获取html-webpack-plugin参数的方法
 var getHtmlConfig = function (name, title) {
     return {
@@ -30,7 +33,8 @@ var config = {
     },
     output: {
         path: './dist',
-        publicPath: '/dist',
+        publicPath  : WEBPACK_ENV === 'online' ? '//s.happymmall.com/mmall_admin_fe/dist/' : '/dist/',
+       /* publicPath: '/dist',*/
         filename: 'js/[name].js'
     },
     module: {
@@ -47,6 +51,17 @@ var config = {
         alias: {
             node_modules: __dirname + '/node_modules',
             utils: __dirname + '/src/utils',
+            service: __dirname + '/src/service',
+        }
+    },
+    devServer: {
+        port: 8088,
+        proxy: {
+            '/api': {
+                target: 'http://localhost:8080/',
+                pathRewrite: {'^/api' : '/mmall/api'},
+                changeOrigin: true
+            }
         }
     },
     plugins: [
@@ -68,5 +83,10 @@ var config = {
         new HtmlWebpackPlugin(getHtmlConfig('index', '后台管理')),
     ]
 };
+
+// 开发环境下，使用devServer热加载
+if(WEBPACK_ENV === 'dev'){
+    config.entry.common.push('webpack-dev-server/client?http://localhost:8088');
+}
 
 module.exports = config;

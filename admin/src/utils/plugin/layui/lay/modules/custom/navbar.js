@@ -157,7 +157,7 @@ layui.define(['element', 'common'], function (exports) {
                                     }
                                 };
                                 clickMenu($a);
-                                if (!menuObj.isParent){
+                                if (!menuObj.parent){
                                     callback(data);
                                 }
                                 return false;
@@ -241,7 +241,7 @@ layui.define(['element', 'common'], function (exports) {
             $a.append('<span class ="nav-indicate">');
             $li.append($a);
             $menu.append($li);
-            if(item.isParent){
+            if(item.parent){
                 var $span = $('<span class="layui-nav-more"></span>');
                 $a.append( $span);
                 var childMenus = getMenusByParentId(item.id);
@@ -286,7 +286,7 @@ layui.define(['element', 'common'], function (exports) {
             }else{
                 $dl.addClass("layui-nav-child-hide");
             }
-            if (childItem.isParent) {
+            if (childItem.parent) {
                 $a.append($span);
                 var pId = childItem.id;
                 var childMenus = getMenusByParentId(pId);
@@ -323,7 +323,7 @@ layui.define(['element', 'common'], function (exports) {
         //$(a).parent().toggleClass("layui-nav-itemed");
         var menuObj = $(a).data("menuObj");
         var $dd = $(a).parent("dd");
-        if (menuObj.isParent){
+        if (menuObj.parent){
             if($dd !==undefined){
                 $dd.removeClass("layui-this");
             }
@@ -343,7 +343,7 @@ layui.define(['element', 'common'], function (exports) {
             }
         }
         //点击的是菜单项
-        if(!menuObj.isParent){
+        if(!menuObj.parent){
             //console.log("====点击菜单"+menuObj.title);
         }
     }

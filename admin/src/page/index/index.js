@@ -5,15 +5,18 @@
  */
 
 require('./index.css');
+var _menu = require("service/menu-service.js");
 var tab;
 var form;
-layui.use(['element', 'layer', 'navbar', 'tab'], function () {
+var navbar;
+layui.use(['element', 'form', 'layer', 'navbar', 'tab', 'jquery'], function () {
     var element = layui.element(),
         $ = layui.jquery,
         layer = layui.layer,
         navbar = layui.navbar();
     tab = layui.tab({
-        elem: '.admin-nav-card' //设置选项卡容器
+        //设置选项卡容器
+        elem: '.admin-nav-card'
         ,
         /* maxSetting: {
          max: 5,
@@ -21,12 +24,13 @@ layui.use(['element', 'layer', 'navbar', 'tab'], function () {
          },*/
         contextMenu: true,
         onSwitch: function (data) {
-          /*  console.log(data.id); //当前Tab的Id
-            console.log(data.index); //得到当前Tab的所在下标
-            console.log(data.elem); //得到当前的Tab大容器
-            console.log(tab.getCurrentTabId())*/
+            /*  console.log(data.id); //当前Tab的Id
+             console.log(data.index); //得到当前Tab的所在下标
+             console.log(data.elem); //得到当前的Tab大容器
+             console.log(tab.getCurrentTabId())*/
         },
-        closeBefore: function (obj) { //tab 关闭之前触发的事件
+        //tab 关闭之前触发的事件
+        closeBefore: function (obj) {
             console.log(obj);
             //obj.title  -- 标题
             //obj.url    -- 链接地址
@@ -58,21 +62,6 @@ layui.use(['element', 'layer', 'navbar', 'tab'], function () {
             $(this).height($content.height());
         });
     }).resize();
-
-    //设置navbar
-    navbar.set({
-        spreadOne: true,
-        elem: '#admin-navbar-side',
-        cached: false,
-       /* data: navs*/
-         url: '../plugin/layui/json/navs.json'
-    });
-    //渲染navbar
-    navbar.render();
-    //监听点击事件
-    navbar.on('click(side)', function (data) {
-        tab.tabAdd(data.field);
-    });
     //清除缓存
     $('#clearCached').on('click', function () {
         navbar.cleanCached();
@@ -81,14 +70,34 @@ layui.use(['element', 'layer', 'navbar', 'tab'], function () {
         });
     });
 
-    $(".refreshThis").click(function () {//刷新当前页
+    //刷新当前页
+    $(".refreshThis").click(function () {
         tab.refreshThis();
     });
-    $(".closePageOther").click(function () {//关闭其它页
+    //关闭其它页
+    $(".closePageOther").click(function () {
         tab.deleteTabOther();
     });
-    $(".closePageAll").click(function () {//关闭所有页
+    //关闭所有页
+    $(".closePageAll").click(function () {
         tab.deleteTabAll();
+    });
+    //获取用户对应的菜单
+    _menu.getMenusByUserId(2 , function (data) {
+        //设置navbar
+        navbar.set({
+            spreadOne: true,
+            elem: '#admin-navbar-side',
+            cached: true,
+            data: data
+        });
+        //渲染navbar
+        navbar.render();
+        //监听点击事件
+        navbar.on('click(side)', function (data) {
+            tab.tabAdd(data.field);
+        });
+        console.log("data:::"+data);
     });
 
 });
