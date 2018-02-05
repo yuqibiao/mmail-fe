@@ -24,7 +24,7 @@ layui.define(['layer', 'laypage', 'laytpl'], function (exports) {
             paged: true,//是否显示分页组件
             pageConfig: { //参数应该为object类型
                 elem: undefined,
-                size: 15 //分页大小
+                pageSize: 15 //分页大小
             },
             success: undefined, //type:function
             fail: function (res) {
@@ -37,24 +37,24 @@ layui.define(['layer', 'laypage', 'laytpl'], function (exports) {
             }
         };
     };
-    /**
-     * 版本号
-     */
+	/**
+	 * 版本号
+	 */
     Paging.prototype.v = '1.0.3';
 
-    /**
-     * 设置
-     * @param {Object} options
-     */
+	/**
+	 * 设置
+	 * @param {Object} options
+	 */
     Paging.prototype.set = function (options) {
         var that = this;
         $.extend(true, that.config, options);
         return that;
     };
-    /**
-     * 初始化
-     * @param {Object} options
-     */
+	/**
+	 * 初始化
+	 * @param {Object} options
+	 */
     Paging.prototype.init = function (options) {
         var that = this;
         $.extend(true, that.config, options);
@@ -86,17 +86,16 @@ layui.define(['layer', 'laypage', 'laytpl'], function (exports) {
             throwError('Paging Error:type参数配置出错，只支持GET或都POST');
         }
         that.get({
-            start: 0,
-            size: _config.pageConfig.size
+            pageIndex: 1,
+            pageSize: _config.pageConfig.size
         });
 
         return that;
     };
-    /**
-     * 获取数据
-     * @param {Object} options
-     */
-    var pageIndex = 1;
+	/**
+	 * 获取数据
+	 * @param {Object} options
+	 */
     Paging.prototype.get = function (options) {
         var that = this;
         var _config = that.config;
@@ -106,8 +105,8 @@ layui.define(['layer', 'laypage', 'laytpl'], function (exports) {
         }
         //默认参数
         var df = {
-            start: 0,
-            size: _config.pageConfig.size
+            pageIndex: 1,
+            pageSize: _config.pageConfig.size
         };
         $.extend(true, _config.params, df, options);
         $.ajax({
@@ -118,45 +117,45 @@ layui.define(['layer', 'laypage', 'laytpl'], function (exports) {
             success: function (result, status, xhr) {
                 if (loadIndex !== undefined)
                     layer.close(loadIndex); //关闭等待层
-                if (result.code===200) {
+                if (result.rel) {
                     //获取模板
                     var tpl = _config.tempType === 0 ? $(_config.tempElem).html() : _config.tempElem;
                     //渲染数据
-                    laytpl(tpl).render(result.data, function (html) {
+                    laytpl(tpl).render(result, function (html) {
                         if (_config.renderBefore) {
                             _config.renderBefore(html, function (formatHtml) {
                                 $(_config.elem).html(formatHtml);
-                            }, result.data.list);
+                            }, result.list);
                         }
                         else {
                             $(_config.elem).html(html);
                         }
                     });
                     if (_config.paged) {
-                        if (result.data.pages === null || result.data.pages === undefined) {
+                        if (result.count === null || result.count === undefined) {
                             throwError('Paging Error:请返回数据总数！');
                             return;
                         }
                         var _pageConfig = _config.pageConfig;
                         var pageSize = _pageConfig.size;
-                        var pages = result.data.pages;
-                        console.log("=====pages"+pages)
+                        var pages = result.count % pageSize == 0 ?
+                            (result.count / pageSize) : (result.count / pageSize + 1);
                         var defaults = {
                             cont: $(_pageConfig.elem),
-                            curr: pageIndex,
+                            curr: _config.params.start,
                             pages: pages,
                             jump: function (obj, first) {
                                 //得到了当前页，用于向服务端请求对应数据
-                                pageIndex = obj.curr;
+                                var curr = obj.curr;
                                 if (!first) {
                                     that.get({
-                                        start: (pageIndex - 1) * pageSize,
+                                        start: curr,
                                         size: pageSize
                                     });
                                 }
                             }
                         };
-                        //$.extend(defaults, _pageConfig); //参数合并
+                        $.extend(defaults, _pageConfig); //参数合并
                         layui.laypage(defaults); //调用laypage组件渲染分页
                     }
                     if (_config.success) {
@@ -166,7 +165,7 @@ layui.define(['layer', 'laypage', 'laytpl'], function (exports) {
                     var thLength = $(_config.elem).siblings('thead').find('th').length;
                     $(_config.elem).html('<tr><td colspan="' + thLength + '" style="text-align:left;">' + result.msg + '</td></tr>');
                     if (_config.fail) {
-                        _config.fail(result.msg); //获取数据失败
+                        _config.fail(result); //获取数据失败
                     }
                 }
                 if (_config.complate) {
@@ -180,10 +179,10 @@ layui.define(['layer', 'laypage', 'laytpl'], function (exports) {
             }
         });
     };
-    /**
-     * 抛出一个异常错误信息
-     * @param {String} msg
-     */
+	/**
+	 * 抛出一个异常错误信息
+	 * @param {String} msg
+	 */
     function throwError(msg) {
         throw new Error(msg);
     };

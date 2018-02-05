@@ -2,23 +2,19 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>用户管理</title>
+    <title>商品分类管理</title>
     <%= require('html-loader!./common/head-common.html') %>
 </head>
 <body>
-
 <div class="admin-main">
-
-    <!--操作-->
     <blockquote class="layui-elem-quote">
         <a href="javascript:;" class="layui-btn layui-btn-small" id="add">
             <i class="layui-icon">&#xe608;</i> 添加信息
         </a>
         <a href="#" class="layui-btn layui-btn-small" id="getSelected">
-            <i class="fa fa-delete" aria-hidden="true"></i> 删除选中
+            <i class="fa fa-shopping-cart" aria-hidden="true"></i> 删除选中
         </a>
     </blockquote>
-
     <!--用户信息展示表格-->
     <fieldset class="layui-elem-field">
         <legend>数据列表</legend>
@@ -27,9 +23,11 @@
                 <thead>
                 <tr>
                     <th style="width: 30px;"><input type="checkbox" lay-filter="allselector" lay-skin="primary"></th>
-                    <th>姓名</th>
-                    <th>手机号</th>
-                    <th>邮箱</th>
+                    <th>父分类</th>
+                    <th>分类名</th>
+                    <th>状态</th>
+                    <th>排序号</th>
+                    <th>创建时间</th>
                     <th>操作</th>
                 </tr>
                 </thead>
@@ -46,19 +44,51 @@
 
 </div>
 
-
 <!--用户信息表格模板-->
 <script type="text/html" id="tpl">
     {{# layui.each(d.list, function(index, item){ }}
+
+    {{#
+    var setStatus=function(status){
+    if(status===0){
+    return '禁用';
+    }else if(status===1){
+    return '正常可用';
+    }else{
+    return '未知';
+    }
+    }
+    }}
+
+    {{#
+    var formatTimestamp = function(timestamp){
+    var newDate = new Date();
+    newDate.setTime(timestamp);
+    return newDate.toLocaleString();
+    }
+    }}
+
+    {{#
+    var setParent = function(parentId){
+    if(parentId==null || parentId==''){
+    return '没有父节点'
+    }else{
+    return parentId
+    }
+    }
+    }}
+
     <tr>
         <td><input type="checkbox" lay-skin="primary"></td>
-        <td>{{ item.username }}</td>
-        <td>{{ item.phone }}</td>
-        <td>{{ item.email }}</td>
+        <td>{{ setParent(item.parentId )}}</td>
+        <td>{{ item.name }}</td>
+        <td>{{ setStatus( item.status) }}</td>
+        <td>{{ item.code }}</td>
+        <td>{{ formatTimestamp(item.createTime) }}</td>
         <td>
             <a href="/detail-1" target="_blank" class="layui-btn layui-btn-normal layui-btn-mini">预览</a>
-            <a href="javascript:;" data-id="{{ item.userId }}" data-opt="edit" class="layui-btn layui-btn-mini">编辑</a>
-            <a href="javascript:;" data-id="{{ item.userId }}" data-opt="del" class="layui-btn layui-btn-danger layui-btn-mini">删除</a>
+            <a href="javascript:;" data-id="{{ item.categoryId }}" data-opt="edit" class="layui-btn layui-btn-mini">编辑</a>
+            <a href="javascript:;" data-id="{{ item.categoryId }}" data-opt="del" class="layui-btn layui-btn-danger layui-btn-mini">删除</a>
         </td>
     </tr>
     {{# }); }}

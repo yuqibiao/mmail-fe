@@ -1,10 +1,10 @@
 /**
- * 用户展示
+ * 商品信息页面对应js
  *
  * Created by yu
- * on 2018/1/19.
+ * on 2018/2/5.
  */
-require('./user-list.css');
+require('./product-list.css');
 
 layui.use(['paging', 'form'], function() {
     var $ = layui.jquery,
@@ -15,10 +15,10 @@ layui.use(['paging', 'form'], function() {
 
     paging.init({
         openWait: true,
-        url: '/api/user/v1/users', //地址
+        url: 'api/product/v1/products/categories/6', //地址
         elem: '#content', //内容容器
         params: { //发送到服务端的参数
-            userId:2
+            categoryId:6
         },
         type: 'GET',
         tempElem: '#tpl', //模块容器
@@ -68,13 +68,12 @@ layui.use(['paging', 'form'], function() {
         });
         layer.msg('你选择的id：' + idList.length);
     });
-
     var addBoxIndex = -1;
     $('#add').on('click', function() {
         if(addBoxIndex !== -1)
             return;
         //本表单通过ajax加载 --以模板的形式，当然你也可以直接写在页面上读取
-        $.get('../view/user-add.html', null, function(form) {
+        $.get('../view/product-add.html', null, function(form) {
             addBoxIndex = layer.open({
                 type: 1,
                 title: '添加表单',
@@ -85,7 +84,7 @@ layui.use(['paging', 'form'], function() {
                 area: ['600px', '500px'],
                 zIndex: 2,
                 resize : true,
-               /* maxmin: true,*/
+                /* maxmin: true,*/
                 yes: function(index) {
                     //触发表单的提交事件
                     $('form.layui-form').find('button[lay-filter=edit]').click();

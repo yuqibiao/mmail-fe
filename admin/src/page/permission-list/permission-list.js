@@ -1,10 +1,10 @@
 /**
- * 用户展示
+ * 权限信息相关
  *
  * Created by yu
- * on 2018/1/19.
+ * on 2018/2/5.
  */
-require('./user-list.css');
+require('./permission-list.css');
 
 layui.use(['paging', 'form'], function() {
     var $ = layui.jquery,
@@ -15,7 +15,7 @@ layui.use(['paging', 'form'], function() {
 
     paging.init({
         openWait: true,
-        url: '/api/user/v1/users', //地址
+        url: '/api/permission/v1/permissions', //地址
         elem: '#content', //内容容器
         params: { //发送到服务端的参数
             userId:2
@@ -68,7 +68,6 @@ layui.use(['paging', 'form'], function() {
         });
         layer.msg('你选择的id：' + idList.length);
     });
-
     var addBoxIndex = -1;
     $('#add').on('click', function() {
         if(addBoxIndex !== -1)
@@ -85,7 +84,7 @@ layui.use(['paging', 'form'], function() {
                 area: ['600px', '500px'],
                 zIndex: 2,
                 resize : true,
-               /* maxmin: true,*/
+                /* maxmin: true,*/
                 yes: function(index) {
                     //触发表单的提交事件
                     $('form.layui-form').find('button[lay-filter=edit]').click();

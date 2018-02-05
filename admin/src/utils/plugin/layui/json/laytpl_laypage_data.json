@@ -1,29 +1,52 @@
 {
-    "rel": true,
-    "msg": "获取成功",
-    "list": [
-        {
-        	"id":1,
-            "name": "张三",
-            "age":21,
-            "createtime": "2017-01-10 10:42:36"
-        },
-        {
-        	"id":2,
-            "name": "李四",
-            "age":31,
-            "createtime": "2017-01-10 10:42:36"
-        },{
-        	"id":3,
-            "name": "王五",
-            "age":23,
-            "createtime": "2017-01-10 10:42:36"
-        },{
-        	"id":4,
-            "name": "赵六",
-            "age":18,
-            "createtime": "2017-01-10 10:42:36"
-        }
-    ],
-    "count": 100
+    "code": 200,
+    "data": {
+        "pageNum": 1,
+        "pageSize": 10,
+        "size": 2,
+        "startRow": 1,
+        "endRow": 2,
+        "total": 2,
+        "pages": 1,
+        "list": [
+            {
+                "userId": 2,
+                "username": "yuqibiao",
+                "password": "233",
+                "phone": "1311111112",
+                "email": "59898@qq.com",
+                "status": 0,
+                "question": "who are you",
+                "answer": "你大爷",
+                "createTime": "",
+                "updateTime": ""
+            },
+            {
+                "userId": 3,
+                "username": "yuqibiao1",
+                "password": "233",
+                "phone": "1311111112",
+                "email": "59898@qq.com",
+                "status": 2,
+                "question": "who are you",
+                "answer": "你大爷",
+                "createTime": "",
+                "updateTime": 1517212687000
+            }
+        ],
+        "prePage": 0,
+        "nextPage": 0,
+        "isFirstPage": true,
+        "isLastPage": true,
+        "hasPreviousPage": false,
+        "hasNextPage": false,
+        "navigatePages": 8,
+        "navigatepageNums": [
+            1
+        ],
+        "navigateFirstPage": 1,
+        "navigateLastPage": 1,
+        "firstPage": 1,
+        "lastPage": 1
+    }
 }

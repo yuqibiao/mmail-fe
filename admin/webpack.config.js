@@ -26,10 +26,14 @@ var getHtmlConfig = function (name, title) {
 // webpack config
 var config = {
     entry: {
+        'index': ['./src/page/index/index.js'],
         'common': ['./src/page/common/common.js'],
         'user-login': ['./src/page/user-login/user-login.js'],
         'user-list': ['./src/page/user-list/user-list.js'],
-        'index': ['./src/page/index/index.js'],
+        'role-list': ['./src/page/role-list/role-list.js'],
+        'permission-list': ['./src/page/permission-list/permission-list.js'],
+        'product-category-list': ['./src/page/product-category-list/product-category-list.js'],
+        'product-list': ['./src/page/product-list/product-list.js'],
     },
     output: {
         path: './dist',
@@ -78,9 +82,14 @@ var config = {
 
         ]),
         // html模板的处理
+        new HtmlWebpackPlugin(getHtmlConfig('index', '后台管理')),
         new HtmlWebpackPlugin(getHtmlConfig('user-login', '用户后台登录')),
         new HtmlWebpackPlugin(getHtmlConfig('user-list', '用户信息管理')),
-        new HtmlWebpackPlugin(getHtmlConfig('index', '后台管理')),
+        new HtmlWebpackPlugin(getHtmlConfig('user-add', '添加用户')),
+        new HtmlWebpackPlugin(getHtmlConfig('role-list', '角色信息管理')),
+        new HtmlWebpackPlugin(getHtmlConfig('permission-list', '权限信息管理')),
+        new HtmlWebpackPlugin(getHtmlConfig('product-category-list', '商品分类管理')),
+        new HtmlWebpackPlugin(getHtmlConfig('product-list.html', '商品信息管理')),
     ]
 };
 
