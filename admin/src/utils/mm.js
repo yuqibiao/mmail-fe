@@ -15,9 +15,10 @@ var _mm = {
     request : function(param){
         var _this = this;
         $.ajax({
-            type        : param.method  || 'get',
+            type        : param.type  || 'get',
             url         : param.url     || '',
-            dataType    : param.type    || 'json',
+            dataType    : param.dataType    || 'json',
+            contentType : param.contentType||'application/x-www-form-urlencoded',
             data        : param.data    || '',
             success     : function(res){
                 // 请求成功
@@ -30,6 +31,7 @@ var _mm = {
                 }
                 // 请求数据错误
                 else if(500 === res.code){
+                    //window.alert("错误："+res.msg);
                     typeof param.error === 'function' && param.error(res.msg);
                 }
             },

@@ -15,9 +15,9 @@ var _mm = {
     request : function(param){
         var _this = this;
         $.ajax({
-            type        : param.method  || 'get',
+            type        : param.type  || 'get',
             url         : param.url     || '',
-            dataType    : param.type    || 'json',
+            dataType    : param.dataType    || 'application/json',
             data        : param.data    || '',
             success     : function(res){
                 // 请求成功

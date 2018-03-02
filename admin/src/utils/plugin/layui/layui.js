@@ -15,6 +15,7 @@
         navbar: "modules/custom/navbar",
         tab: "modules/custom/tab",
         paging: "modules/custom/paging",
+        btable: "modules/custom/btable",
         layer: "modules/layer",
         laydate: "modules/laydate",
         laypage: "modules/laypage",

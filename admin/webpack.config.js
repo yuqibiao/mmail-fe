@@ -86,10 +86,15 @@ var config = {
         new HtmlWebpackPlugin(getHtmlConfig('user-login', '用户后台登录')),
         new HtmlWebpackPlugin(getHtmlConfig('user-list', '用户信息管理')),
         new HtmlWebpackPlugin(getHtmlConfig('user-add', '添加用户')),
+        new HtmlWebpackPlugin(getHtmlConfig('user-edit', '修改用户')),
         new HtmlWebpackPlugin(getHtmlConfig('role-list', '角色信息管理')),
+        new HtmlWebpackPlugin(getHtmlConfig('role-add', '添加角色')),
+        new HtmlWebpackPlugin(getHtmlConfig('role-edit', '修改角色')),
         new HtmlWebpackPlugin(getHtmlConfig('permission-list', '权限信息管理')),
+        new HtmlWebpackPlugin(getHtmlConfig('permission-add', '添加权限')),
+        new HtmlWebpackPlugin(getHtmlConfig('permission-edit', '修改权限')),
         new HtmlWebpackPlugin(getHtmlConfig('product-category-list', '商品分类管理')),
-        new HtmlWebpackPlugin(getHtmlConfig('product-list.html', '商品信息管理')),
+        new HtmlWebpackPlugin(getHtmlConfig('product-list', '商品信息管理')),
     ]
 };
 

@@ -29,7 +29,7 @@ layui.define(['layer', 'laypage', 'laytpl'], function (exports) {
             success: undefined, //type:function
             fail: function (res) {
                 console.log(res.msg);
-                //layer.msg(res.msg, { icon: 2 });
+                layer.msg(res.msg, { icon: 2 });
             }, //type:function
             complate: undefined, //type:function
             serverError: function (xhr, status, error) { //ajax的服务错误
@@ -140,7 +140,7 @@ layui.define(['layer', 'laypage', 'laytpl'], function (exports) {
                         var _pageConfig = _config.pageConfig;
                         var pageSize = _pageConfig.size;
                         var pages = result.data.pages;
-                        console.log("=====pages"+pages)
+                        //console.log("=====pages"+pages)
                         var defaults = {
                             cont: $(_pageConfig.elem),
                             curr: pageIndex,
@@ -156,7 +156,7 @@ layui.define(['layer', 'laypage', 'laytpl'], function (exports) {
                                 }
                             }
                         };
-                        //$.extend(defaults, _pageConfig); //参数合并
+                        $.extend(defaults, _pageConfig); //参数合并
                         layui.laypage(defaults); //调用laypage组件渲染分页
                     }
                     if (_config.success) {

@@ -1,5 +1,6 @@
 <div style="margin: 15px;">
     <form class="layui-form">
+        <input id="roleId"  type="hidden" name="roleId">
         <div class="layui-form-item">
             <label class="layui-form-label">角色名</label>
             <div class="layui-input-block">
@@ -25,6 +26,6 @@
                 <input type="radio" name="status" value="1" title="不可用">
             </div>
         </div>
-        <button lay-filter="addRole" lay-submit style="display: none;"></button>
+        <button lay-filter="editRole" lay-submit style="display: none;"></button>
     </form>
 </div>
