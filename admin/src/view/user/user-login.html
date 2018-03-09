@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>后台登录</title>
-    <%= require('html-loader!./common/head-common.html')  %>
+    <%= require('html-loader!../common/head-common.html')  %>
 </head>
 <body>
 
@@ -20,7 +20,7 @@
         </div>
         <div class="layui-form-item login-code">
             <input class="layui-input" name="code" placeholder="验证码" lay-verify="required" type="text" autocomplete="off">
-            <div class="code"><img src="<%= require('../images/code.jpg') %>" ></div>
+            <div class="code"><img src="<%= require('../../images/code.jpg') %>" ></div>
         </div>
         <button class="layui-btn login_btn" lay-submit="www.baidu.com" lay-filter="login">登录</button>
     </form>
@@ -28,6 +28,6 @@
 
 </div>
 
-<%= require('html-loader!./common/footer.html')  %>
+<%= require('html-loader!../common/footer.html')  %>
 </body>
 </html>

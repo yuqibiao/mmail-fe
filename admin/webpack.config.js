@@ -14,13 +14,15 @@ var WEBPACK_ENV            = process.env.WEBPACK_ENV || 'dev';
 
 // 获取html-webpack-plugin参数的方法
 var getHtmlConfig = function (name, title) {
+    var strList = name.split("/");
+    var fileName = strList[strList.length-1];
     return {
         template: './src/view/' + name + '.html',
-        filename: 'view/' + name + '.html',
+        filename: 'view/' + fileName + '.html',
         title: title,
         inject: true,
         hash: true,
-        chunks: ['common', name],
+        chunks: ['common', fileName],
     };
 };
 // webpack config
@@ -82,20 +84,20 @@ var config = {
         ]),
         // html模板的处理
         new HtmlWebpackPlugin(getHtmlConfig('index', '后台管理')),
-        new HtmlWebpackPlugin(getHtmlConfig('user-login', '用户后台登录')),
-        new HtmlWebpackPlugin(getHtmlConfig('user-list', '用户信息管理')),
-        new HtmlWebpackPlugin(getHtmlConfig('user-add', '添加用户')),
-        new HtmlWebpackPlugin(getHtmlConfig('user-edit', '修改用户')),
-        new HtmlWebpackPlugin(getHtmlConfig('user-add-role', '分配角色')),
-        new HtmlWebpackPlugin(getHtmlConfig('role-list', '角色信息管理')),
-        new HtmlWebpackPlugin(getHtmlConfig('role-add', '添加角色')),
-        new HtmlWebpackPlugin(getHtmlConfig('role-edit', '修改角色')),
-        new HtmlWebpackPlugin(getHtmlConfig('role-permission-assignment', '权限分配')),
-        new HtmlWebpackPlugin(getHtmlConfig('permission-list', '权限信息管理')),
-        new HtmlWebpackPlugin(getHtmlConfig('permission-add', '添加权限')),
-        new HtmlWebpackPlugin(getHtmlConfig('permission-edit', '修改权限')),
-        new HtmlWebpackPlugin(getHtmlConfig('product-category-list', '商品分类管理')),
-        new HtmlWebpackPlugin(getHtmlConfig('product-list', '商品信息管理')),
+        new HtmlWebpackPlugin(getHtmlConfig('user/user-login', '用户后台登录')),
+        new HtmlWebpackPlugin(getHtmlConfig('user/user-list', '用户信息管理')),
+        new HtmlWebpackPlugin(getHtmlConfig('user/user-add', '添加用户')),
+        new HtmlWebpackPlugin(getHtmlConfig('user/user-edit', '修改用户')),
+        new HtmlWebpackPlugin(getHtmlConfig('user/user-add-role', '分配角色')),
+        new HtmlWebpackPlugin(getHtmlConfig('role/role-list', '角色信息管理')),
+        new HtmlWebpackPlugin(getHtmlConfig('role/role-add', '添加角色')),
+        new HtmlWebpackPlugin(getHtmlConfig('role/role-edit', '修改角色')),
+        new HtmlWebpackPlugin(getHtmlConfig('role/role-permission-assignment', '权限分配')),
+        new HtmlWebpackPlugin(getHtmlConfig('permission/permission-list', '权限信息管理')),
+        new HtmlWebpackPlugin(getHtmlConfig('permission/permission-add', '添加权限')),
+        new HtmlWebpackPlugin(getHtmlConfig('permission/permission-edit', '修改权限')),
+        new HtmlWebpackPlugin(getHtmlConfig('product-category/product-category-list', '商品分类管理')),
+        new HtmlWebpackPlugin(getHtmlConfig('product/product-list', '商品信息管理')),
     ]
 };
 

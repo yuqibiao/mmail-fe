@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>商品分类管理</title>
-    <%= require('html-loader!./common/head-common.html') %>
+    <title>商品管理</title>
+    <%= require('html-loader!../common/head-common.html') %>
 </head>
 <body>
 <div class="admin-main">
@@ -17,17 +17,19 @@
     </blockquote>
     <!--用户信息展示表格-->
     <fieldset class="layui-elem-field">
-        <legend>数据列表</legend>
+        <legend>商品信息</legend>
         <div class="layui-field-box layui-form">
             <table class="layui-table admin-table">
                 <thead>
                 <tr>
                     <th style="width: 30px;"><input type="checkbox" lay-filter="allselector" lay-skin="primary"></th>
-                    <th>父分类</th>
-                    <th>分类名</th>
+                    <th>所属分类</th>
+                    <th>商品名称</th>
+                    <th>副标题</th>
+                    <th>主图</th>
+                    <th>价格</th>
+                    <th>库存</th>
                     <th>状态</th>
-                    <th>排序号</th>
-                    <th>创建时间</th>
                     <th>操作</th>
                 </tr>
                 </thead>
@@ -69,21 +71,25 @@
     }}
 
     {{#
-    var setParent = function(parentId){
-    if(parentId==null || parentId==''){
+    var setCategory = function(categoryId){
+    if(categoryId==null || categoryId==''){
     return '没有父节点'
     }else{
-    return parentId
+    return categoryId
     }
     }
     }}
 
     <tr>
         <td><input type="checkbox" lay-skin="primary"></td>
-        <td>{{ setParent(item.parentId )}}</td>
+        <td>{{ setParent(item.categoryId )}}</td>
         <td>{{ item.name }}</td>
+        <td>{{ item.subtitle }}</td>
+        <td>{{ item.mainImage}}</td>
+        <td>{{ item.price}}</td>
+        <td>{{ item.stock}}</td>
         <td>{{ setStatus( item.status) }}</td>
-        <td>{{ item.code }}</td>
+        <!--<td>{{ item.code }}</td>-->
         <td>{{ formatTimestamp(item.createTime) }}</td>
         <td>
             <a href="/detail-1" target="_blank" class="layui-btn layui-btn-normal layui-btn-mini">预览</a>
@@ -94,6 +100,6 @@
     {{# }); }}
 </script>
 
-<%= require('html-loader!./common/footer.html') %>
+<%= require('html-loader!../common/footer.html') %>
 </body>
 </html>
