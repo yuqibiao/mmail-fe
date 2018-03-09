@@ -9,6 +9,19 @@ var _mm = require("utils/mm.js");
 var _permission = {
 
     /**
+     * 得到所有的权限信息
+     *
+     * @param resolve
+     * @param reject
+     */
+    getAllPermission:function (resolve , reject) {
+        _mm.request({
+            url: _mm.getServerUrl("/api/v1/permissions"),
+            success: resolve,
+            error: reject
+        });
+    },
+    /**
      * 根据permissionId得到permission信息
      *
      * @param permissionId
@@ -17,7 +30,7 @@ var _permission = {
      */
     getPermissionById:function(permissionId , resolve , reject){
         _mm.request({
-            url: _mm.getServerUrl("/api/user/v1/permissions/" + permissionId),
+            url: _mm.getServerUrl("/api/permission/v1/permissions/" + permissionId),
             success: resolve,
             error: reject
         });
@@ -33,7 +46,7 @@ var _permission = {
     updatePermission:function(permissionInfo , resolve , reject){
         _mm.request({
             type : 'patch',
-            url:_mm.getServerUrl("/api/user/v1/permissions"),
+            url:_mm.getServerUrl("/api/permission/v1/permissions"),
             data:permissionInfo,
             contentType : "application/json",
             success:resolve,
@@ -51,7 +64,7 @@ var _permission = {
     deletePermissionByIdList:function(idList , resolve , reject){
         _mm.request({
             type:"post",
-            url:_mm.getServerUrl("/api/role/v1/permissions:delete"),
+            url:_mm.getServerUrl("/api/permission/v1/permissions:delete"),
             data :idList,
             contentType : "application/json",
             success:resolve,
@@ -69,7 +82,7 @@ var _permission = {
     deletePermissionById:function (permissionId , resolve , reject) {
         _mm.request({
             type : 'delete',
-            url:_mm.getServerUrl("/api/role/v1/permissions/"+permissionId),
+            url:_mm.getServerUrl("/api/permission/v1/permissions/"+permissionId),
             success:resolve,
             error:reject
         });
@@ -85,7 +98,7 @@ var _permission = {
     addPermission:function (permission , resolve , reject) {
         _mm.request({
             type : 'post',
-            url:_mm.getServerUrl("/api/role/v1/permissions"),
+            url:_mm.getServerUrl("/api/permission/v1/permissions"),
             data:permission,
             contentType : "application/json",
             success:resolve,

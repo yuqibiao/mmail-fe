@@ -1,30 +1,36 @@
 <div style="margin: 15px;">
     <form class="layui-form">
+
         <div class="layui-form-item">
             <label class="layui-form-label">父节点</label>
             <div class="layui-input-block">
-                <select name="parentId" lay-filter="parentId">
-                    <option value="1">用户管理</option>
-                    <option value="2">商品管理</option>
-                </select>
+                <input type="text" id="parentValue"  lay-verify="required"
+                       placeholder="请选择父节点" autocomplete="off" class="layui-input">
+                <input type="hidden" name="parentId" id="parentId">
+                <div id="menuContent" class="menuContent" style="display:none; position: absolute;z-index: 100">
+                    <ul id="parentValueTree" class="ztree" style="margin-top:0;"></ul>
+                </div>
             </div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">权限名</label>
             <div class="layui-input-block">
-                <input type="text" name="name" lay-verify="required"placeholder="请输入权限名" autocomplete="off" class="layui-input" value="角色：1">
+                <input type="text" name="name" lay-verify="required" placeholder="请输入权限名" autocomplete="off"
+                       class="layui-input" value="：1">
             </div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">权限描述</label>
             <div class="layui-input-block">
-                <input type="text" name="description" placeholder="请输入权限描述" autocomplete="off" class="layui-input" value="权限描述bababababalalalala">
+                <input type="text" name="description" placeholder="请输入权限描述" autocomplete="off" class="layui-input"
+                       value="">
             </div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">序列号</label>
             <div class="layui-input-block">
-                <input type="text" name="code" lay-verify="required"placeholder="请输入序列号" autocomplete="off" class="layui-input" value="1">
+                <input type="text" name="code" lay-verify="required" placeholder="请输入序列号" autocomplete="off"
+                       class="layui-input" value="1">
             </div>
         </div>
         <div class="layui-form-item">
@@ -49,6 +55,6 @@
                 <input type="radio" name="status" value="1" title="不可用">
             </div>
         </div>
-        <button lay-filter="addRole" lay-submit style="display: none;"></button>
+        <button lay-filter="addPermission" lay-submit style="display: none;"></button>
     </form>
 </div>

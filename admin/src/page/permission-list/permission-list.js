@@ -6,6 +6,7 @@
  */
 require('./permission-list.css');
 require('../common/bTable.css');
+var _permission = require("service/permission-service.js");
 
 layui.use(['btable','form'], function() {
     var $ = layui.jquery,
@@ -97,7 +98,7 @@ layui.use(['btable','form'], function() {
             },
             {
                 fieldName: '操作',
-                field: 'userId',
+                field: 'permissionId',
                 format: function (val, obj) {
                     var html = '<input type="button" value="编辑" data-action="edit" data-id="' + val + '" class="layui-btn layui-btn-mini" /> ' +
                         '<input type="button" value="删除" data-action="del" data-id="' + val + '" class="layui-btn layui-btn-mini layui-btn-danger" />';
@@ -109,14 +110,14 @@ layui.use(['btable','form'], function() {
                 $(this).children('td:last-child').children('input').each(function () {
                     var $that = $(this);
                     var action = $that.data('action');
-                    var userId = $that.data('id');
+                    var permissionId = $that.data('id');
                     $that.on('click', function () {
                         switch (action) {
                             //---编辑用户
                             case 'edit':
                                 var handlingIndex;
                                 $.get('../view/permission-edit.html', null, function (form) {
-                                    addBoxIndex = layer.open({
+                                    boxIndex = layer.open({
                                         type: 1,
                                         title: '修改用户信息',
                                         content: form,
@@ -129,7 +130,7 @@ layui.use(['btable','form'], function() {
                                         /* maxmin: true,*/
                                         yes: function (index) {
                                             //触发表单的提交事件
-                                            $('form.layui-form').find('button[lay-filter=editUser]').click();
+                                            $('form.layui-form').find('button[lay-filter=editPermission]').click();
                                         },
                                         full: function (elem) {
                                             var win = window.top === window.self ? window : parent.window;
@@ -145,16 +146,42 @@ layui.use(['btable','form'], function() {
                                         success: function (layero, index) {
                                             //填充数据
                                             var inflateIndex = layer.load(2, {time: 10 * 1000});
-                                            _user.getUserByUserId(userId,
+                                            _permission.getPermissionById(permissionId,
                                                 function (res) {
                                                     var body = layer.getChildFrame('body', index);
-                                                    var user = res;
-                                                    $("#userId").val("" + user.userId);
-                                                    $("#username").val("" + user.username);
-                                                    $("#phone").val("" + user.phone);
-                                                    $("#email").val("" + user.email);
-                                                    $("#userId").val("" + user.userId);
-                                                    var statusVal = user.status;
+                                                    var permission = res;
+                                                    $("#permissionId").val("" + permission.permissionId);
+                                                    //---TODO 获取父级数据
+                                                    _permission.getAllPermission(
+                                                        function (res) {
+                                                            $.each(res, function (n, node) {
+                                                               var pId = node.pId;
+                                                                var currentPid = permission.parentId;
+                                                               if (pId!=""&&currentPid!=""&&currentPid===pId){
+                                                                   var name = node.name;
+                                                                   $("#parentValue").val(name);
+                                                               }
+                                                            });
+                                                        } ,
+                                                        function () {
+
+                                                        });
+                                                    $("#parentValue").click(function () {
+                                                        $("#menuContent").slideToggle("fast");
+                                                        _permission.getAllPermission(
+                                                            function (res) {
+                                                                var zNodes = res;
+                                                                $.fn.zTree.init($("#parentValueTree"), setting, zNodes);
+                                                            } ,
+                                                            function () {
+
+                                                            });
+                                                    });
+                                                    $("#name").val("" + permission.name);
+                                                    $("#description").val("" + permission.description);
+                                                    $("#code").val("" + permission.code);
+                                                    $("#target").val("" + permission.target);
+                                                    var statusVal = permission.status;
                                                     $(":radio[name='status'][value='"+statusVal+"']").prop("checked", "checked");
                                                     //---这个不能少！！！！
                                                     form.render('radio');
@@ -167,33 +194,13 @@ layui.use(['btable','form'], function() {
                                             //弹出窗口成功后渲染表单
                                             var form = layui.form();
                                             form.render();
-                                            //表单验证
-                                            form.verify({
-                                                username: function (value, item) { //value：表单的值、item：表单的DOM对象
-                                                    if (!new RegExp("^[a-zA-Z0-9_\u4e00-\u9fa5\\s·]+$").test(value)) {
-                                                        return '用户名不能有特殊字符';
-                                                    }
-                                                    if (/(^\_)|(\__)|(\_+$)/.test(value)) {
-                                                        return '用户名首尾不能出现下划线\'_\'';
-                                                    }
-                                                    if (/^\d+\d+\d$/.test(value)) {
-                                                        return '用户名不能全为数字';
-                                                    }
-                                                }
-                                                //我们既支持上述函数式的方式，也支持下述数组的形式
-                                                //数组的两个值分别代表：[正则匹配、匹配不符时的提示文字]
-                                                , password: [
-                                                    /^[\S]{6,18}$/
-                                                    , '密码必须6到18位，且不能出现空格'
-                                                ]
-                                            });
                                             //表单提交
-                                            form.on('submit(editUser)', function (data) {
+                                            form.on('submit(editPermission)', function (data) {
                                                 handlingIndex = layer.load(2, {time: 10 * 1000});
-                                                _user.updateUser(JSON.stringify(data.field),
+                                                _permission.updatePermission(JSON.stringify(data.field),
                                                     function () {
-                                                        layer.msg("用户信息修改成功");
-                                                        layerTips.close(addBoxIndex);
+                                                        layer.msg("权限信息修改成功");
+                                                        layerTips.close(boxIndex);
                                                         layer.close(handlingIndex);
                                                         location.reload(); //刷新
                                                     },
@@ -205,20 +212,20 @@ layui.use(['btable','form'], function() {
                                             });
                                         },
                                         end: function () {
-                                            addBoxIndex = -1;
+                                            boxIndex = -1;
                                         }
                                     });
                                 });
                                 break;
                             //---单个删除用户信息
                             case 'del':
-                                var username = $that.parent('td').siblings('td[data-field=username]').text();
-                                layer.confirm('确定要删除[ <span style="color:red;">' + username + '</span> ] ?', {icon: 3, title: '操作提示'}, function (index) {
+                                var name = $that.parent('td').siblings('td[data-field=name]').text();
+                                layer.confirm('确定要删除[ <span style="color:red;">' + name + '</span> ] ?', {icon: 3, title: '操作提示'}, function (index) {
                                     //删除用户操作
                                     var handlingIndex = layer.load(2, {time: 10 * 1000});
-                                    _user.deleteUserById(userId,
+                                    _permission.deletePermissionById(permissionId,
                                         function () {
-                                            layer.msg('成功删除 '+username);
+                                            layer.msg('成功删除 '+name);
                                             layer.close(handlingIndex);
                                             location.reload();
                                         },
@@ -253,7 +260,7 @@ layui.use(['btable','form'], function() {
             layer.confirm('确定要删除选中的  <span style="color:red; font-size: 13px">' + count + '</span>  条数据?', {icon: 3, title: '操作提示'},
                 function (index) {
                     var handlingIndex = layer.load(2, {time: 10 * 1000});
-                    _role.deleteRoleByIdList(JSON.stringify(ids),
+                    _permission.deletePermissionByIdList(JSON.stringify(ids),
                         function () {
                             location.reload();
                             layer.msg("删除成功");
@@ -270,16 +277,16 @@ layui.use(['btable','form'], function() {
 
 
     //---添加角色
-    var addBoxIndex = -1;
+    var boxIndex = -1;
     $('#add').on('click', function () {
-        if (addBoxIndex !== -1)
+        if (boxIndex !== -1)
             return;
         //本表单通过ajax加载 --以模板的形式，当然你也可以直接写在页面上读取
         var handlingIndex;
         $.get('../view/permission-add.html', null, function (form) {
-            addBoxIndex = layer.open({
+            boxIndex = layer.open({
                 type: 1,
-                title: '添加角色',
+                title: '添加权限',
                 content: form,
                 btn: ['保存', '取消'],
                 shade: [0.8, '#FFF'],
@@ -290,7 +297,7 @@ layui.use(['btable','form'], function() {
                 /* maxmin: true,*/
                 yes: function (index) {
                     //触发表单的提交事件
-                    $('form.layui-form').find('button[lay-filter=addRole]').click();
+                    $('form.layui-form').find('button[lay-filter=addPermission]').click();
                 },
                 full: function (elem) {
                     var win = window.top === window.self ? window : parent.window;
@@ -307,13 +314,24 @@ layui.use(['btable','form'], function() {
                     //弹出窗口成功后渲染表单
                     var form = layui.form();
                     form.render();
+                    $("#parentValue").click(function () {
+                        $("#menuContent").slideToggle("fast");
+                        _permission.getAllPermission(
+                            function (res) {
+                                var zNodes = res;
+                                $.fn.zTree.init($("#parentValueTree"), setting, zNodes);
+                            } , function () {
+
+                            });
+                    });
+
                     //表单提交
-                    form.on('submit(addRole)', function (data) {
+                    form.on('submit(addPermission)', function (data) {
                         handlingIndex = layer.load(2, {time: 10 * 1000});
-                        _role.addRole(JSON.stringify(data.field),
+                        _permission.addPermission(JSON.stringify(data.field),
                             function () {
                                 layer.msg('添加角色成功');
-                                layerTips.close(addBoxIndex);
+                                layerTips.close(boxIndex);
                                 layerTips.close(handlingIndex);
                                 location.reload(); //刷新
                             },
@@ -325,10 +343,49 @@ layui.use(['btable','form'], function() {
                     });
                 },
                 end: function () {
-                    addBoxIndex = -1;
+                    boxIndex = -1;
                 }
             });
         });
     });
+
+    //---zTree配置
+    var setting = {
+        view: {
+            dblClickExpand: false
+        },
+        data: {
+            simpleData: {
+                enable: true
+            }
+        },
+        callback: {
+            onClick: onClick
+        },
+        view: {
+            // 不显示对应的图标
+            showIcon: false
+        }
+    };
+    function onClick(e, treeId, treeNode) {
+        var zTree = $.fn.zTree.getZTreeObj("parentValueTree"),
+            nodes = zTree.getSelectedNodes(),
+            v = "";
+        ids = "";
+        nodes.sort(function compare(a,b){return a.id-b.id;});
+        for (var i=0, l=nodes.length; i<l; i++) {
+            v += nodes[i].name + ",";
+            ids += nodes[i].id + ",";
+        }
+        if (v.length > 0 ) v = v.substring(0, v.length-1);
+        var cityObj = $("#parentValue");
+        cityObj.attr("value", v);
+        // 将选中的id放到隐藏的文本域中
+        if (ids.length > 0 ) ids = ids.substring(0, ids.length-1);
+        var treeids = $("#parentId");
+        treeids.attr("value", ids);
+        $("#menuContent").fadeOut("fast");
+    }
+
 
 });

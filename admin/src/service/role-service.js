@@ -9,6 +9,47 @@ var _mm = require("utils/mm.js");
 var _role = {
 
     /**
+     * 更新角色的权限信息
+     *
+     * @param updateRolePermissionVo
+     * @param resolve
+     * @param reject
+     */
+    updateRolePermission:function (updateRolePermissionVo , resolve , reject) {
+        _mm.request({
+            type : 'patch',
+            url: _mm.getServerUrl("/api/v1/roles/permissions:update"),
+            data:updateRolePermissionVo,
+            contentType : "application/json",
+            success: resolve,
+            error: reject
+        });
+    },
+
+    /**
+     * 得到某一角色对应的权限
+     *
+     * @param roleId
+     * @param resolve
+     * @param reject
+     */
+    getAllPermissionById:function(roleId , resolve , reject){
+        _mm.request({
+            url: _mm.getServerUrl("/api/v1/roles/"+roleId+"/permissions"),
+            success: resolve,
+            error: reject
+        });
+    },
+
+    getAllRole:function (resolve , reject) {
+        _mm.request({
+            url: _mm.getServerUrl("/api/role/v1/roles:all"),
+            success: resolve,
+            error: reject
+        });
+    },
+
+    /**
      * 根据roleId得到role信息
      *
      * @param roleId

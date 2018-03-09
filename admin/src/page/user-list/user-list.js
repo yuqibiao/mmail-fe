@@ -7,6 +7,7 @@
 require('./user-list.css');
 require('../common/bTable.css');
 var _user = require("service/user-service.js");
+//var _role = require("service/role-service.js");
 
 layui.use(['btable','form'], function () {
     var $ = layui.jquery,
@@ -59,7 +60,8 @@ layui.use(['btable','form'], function () {
                 fieldName: '操作',
                 field: 'userId',
                 format: function (val, obj) {
-                    var html = '<input type="button" value="编辑" data-action="edit" data-id="' + val + '" class="layui-btn layui-btn-mini" /> ' +
+                    var html = '<input type="button" value="角色分配" data-action="addRole" data-id="' + val + '" class="layui-btn layui-btn-mini" /> ' +
+                        '<input type="button" value="编辑" data-action="edit" data-id="' + val + '" class="layui-btn layui-btn-mini" /> ' +
                         '<input type="button" value="删除" data-action="del" data-id="' + val + '" class="layui-btn layui-btn-mini layui-btn-danger" />';
                     return html;
                 }
@@ -72,6 +74,94 @@ layui.use(['btable','form'], function () {
                     var userId = $that.data('id');
                     $that.on('click', function () {
                         switch (action) {
+                            //分配角色
+                            case 'addRole':
+                                $.get('../view/user-add-role.html', null, function (form) {
+                                    addBoxIndex = layer.open({
+                                        type: 1,
+                                        title: '分配角色',
+                                        content: form,
+                                        btn: ['保存', '取消'],
+                                        shade: [0.8, '#FFF'],
+                                        offset: 'auto',
+                                        area: ['600px', '500px'],
+                                        zIndex: 2,
+                                        resize: true,
+                                        /* maxmin: true,*/
+                                        yes: function (index) {
+                                            //触发表单的提交事件
+                                            $('form.layui-form').find('button[lay-filter=addRole]').click();
+                                        },
+                                        full: function (elem) {
+                                            var win = window.top === window.self ? window : parent.window;
+                                            $(win).on('resize', function () {
+                                                var $this = $(this);
+                                                elem.width($this.width()).height($this.height()).css({
+                                                    top: 0,
+                                                    left: 0
+                                                });
+                                                elem.children('div.layui-layer-content').height($this.height() - 95);
+                                            });
+                                        },
+                                        success: function (layero, index) {
+                                            //弹出窗口成功后渲染表单
+                                            var form = layui.form();
+                                            //填充角色信息数据
+                                            var inflateIndex = layer.load(2, {time: 10 * 1000});
+                                            _user.getAllRoleByUserId(
+                                                userId,
+                                                function (res) {
+                                                var roleList = res;
+                                                var roleCheckHtml="";
+                                                $(roleList).each(function (index, item) {
+                                                    if (item.checked){
+                                                        roleCheckHtml+=' <input type="checkbox" checked name="'+item.roleId+'" value="'+item.roleId+'" title="'+item.name+'">';
+                                                    }else{
+                                                        roleCheckHtml+=' <input type="checkbox" name="'+item.roleId+'" value="'+item.roleId+'" title="'+item.name+'">';
+                                                    }
+                                                });
+                                                $("#roleCheck").html(roleCheckHtml);
+                                                    form.render();
+
+                                                    layer.close(inflateIndex);
+                                            } , 
+                                                function (errorMsg) {
+                                                    layer.close(inflateIndex);
+                                                    layer.msg(errorMsg);
+                                            });
+                                            form.render();
+                                            //表单提交
+                                            form.on('submit(addRole)', function (data) {
+                                                var roleIdList = new Array();
+                                                var json = JSON.stringify(data.field)
+                                                console.log("json=="+json);
+                                                for (var key in data.field)
+                                                {
+                                                    roleIdList.push(key);
+                                                }
+                                                var handlingIndex = layer.load(2, {time: 10 * 1000});
+                                                //---添加角色
+                                                _user.addUserRoleList(userId , JSON.stringify(roleIdList),
+                                                    function () {
+                                                        layer.msg('角色添加成功');
+                                                        layer.close(addBoxIndex);
+                                                        layer.close(handlingIndex);
+                                                        //location.reload(); //刷新
+                                                    },
+                                                    function (errorMsg) {
+                                                        layerTips.close(addBoxIndex);
+                                                        layer.close(handlingIndex);
+                                                        layer.msg('' + errorMsg);
+                                                    });
+                                                return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
+                                            });
+                                        },
+                                        end: function () {
+                                            addBoxIndex = -1;
+                                        }
+                                    });
+                                });
+                                break;
                             //---编辑用户
                             case 'edit':
                                 var handlingIndex;
@@ -264,6 +354,7 @@ layui.use(['btable','form'], function () {
                     //弹出窗口成功后渲染表单
                     var form = layui.form();
                     form.render();
+
                     //表单验证
                     form.verify({
                         username: function (value, item) { //value：表单的值、item：表单的DOM对象
@@ -286,16 +377,17 @@ layui.use(['btable','form'], function () {
                     });
                     //表单提交
                     form.on('submit(addUser)', function (data) {
-                        handlingIndex = layer.load(2, {time: 10 * 1000});
+                        var handlingIndex = layer.load(2, {time: 10 * 1000});
                         _user.addUser(JSON.stringify(data.field),
                             function () {
                                 layer.msg('添加用户成功');
                                 layerTips.close(addBoxIndex);
-                                layerTips.close(handlingIndex);
+                                layer.close(handlingIndex);
                                 location.reload(); //刷新
                             },
                             function (errorMsg) {
-                                layerTips.close(handlingIndex);
+                                layerTips.close(addBoxIndex);
+                                layer.close(handlingIndex);
                                 layer.msg('' + errorMsg);
                             });
                         return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
@@ -307,5 +399,30 @@ layui.use(['btable','form'], function () {
             });
         });
     });
+
+    /*绑定字典内容到指定的Select控件*/
+    function bindSelect(selectId, url) {
+        var control = $('#' + selectId);
+        //绑定Ajax的内容
+        $.getJSON(url, function (result) {
+            control.empty();//清空下拉框
+            var data = result.data;
+            $.each(data, function (i, item) {
+                var checked = item.checked;
+                if (checked) {
+                    control.append("<option selected value='" + item.roleId + "'>&nbsp;" + item.roleName + "</option>");
+                } else {
+                    control.append("<option  value='" + item.roleId + "'>&nbsp;" + item.roleName + "</option>");
+                }
+            });
+            //设置Select2的处理
+            control.select2({
+                allowClear: true,
+                escapeMarkup: function (m) {
+                    return m;
+                }
+            });
+        });
+    }
 
 });

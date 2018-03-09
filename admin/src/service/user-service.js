@@ -62,6 +62,21 @@ var _user = {
     },
 
     /**
+     * 得到所有的权限，用户有的checked=true
+     *
+     * @param userId
+     * @param resolve
+     * @param reject
+     */
+    getAllRoleByUserId:function(userId , resolve , reject){
+        _mm.request({
+            url: _mm.getServerUrl("/api/v1/users/"+userId+"/roles:all"),
+            success: resolve,
+            error: reject
+        });
+    },
+
+    /**
      * 通过Id得到用户信息
      *
      * @param userId
@@ -83,6 +98,24 @@ var _user = {
      * @param resolve
      * @param reject
      */
+    addUserRoleList:function(userId ,roleIdList ,  resolve , reject){
+        _mm.request({
+            type : 'post',
+            url:_mm.getServerUrl("/api/v1/users/"+userId+"/roles:add"),
+            data:roleIdList,
+            contentType : "application/json",
+            success:resolve,
+            error:reject
+        });
+    },
+
+    /**
+     * 添加用户
+     *
+     * @param userId
+     * @param resolve
+     * @param reject
+     */
     addUser:function(user , resolve , reject){
         _mm.request({
             type : 'post',
@@ -94,6 +127,6 @@ var _user = {
         });
     }
 
-}
+};
 
 module.exports = _user;

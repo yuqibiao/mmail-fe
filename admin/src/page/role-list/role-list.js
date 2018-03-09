@@ -71,7 +71,9 @@ layui.use(['btable','paging', 'form'], function() {
                 fieldName: '操作',
                 field: 'roleId',
                 format: function (val, obj) {
-                    var html = '<input type="button" value="编辑" data-action="edit" data-id="' + val + '" class="layui-btn layui-btn-mini" /> ' +
+                    var html =
+                        '<input type="button" value="权限分配" data-action="permission" data-id="' + val + '" class="layui-btn layui-btn-mini" /> ' +
+                        '<input type="button" value="编辑" data-action="edit" data-id="' + val + '" class="layui-btn layui-btn-mini" /> ' +
                         '<input type="button" value="删除" data-action="del" data-id="' + val + '" class="layui-btn layui-btn-mini layui-btn-danger" />';
                     return html;
                 }
@@ -84,11 +86,90 @@ layui.use(['btable','paging', 'form'], function() {
                     var roleId = $that.data('id');
                     $that.on('click', function () {
                         switch (action) {
+                            //---权限分配
+                            case "permission":
+                                $.get('../view/role-permission-assignment.html', null, function (form) {
+                                    boxIndex = layer.open({
+                                        type: 1,
+                                        title: '角色权限分配',
+                                        content: form,
+                                        btn: ['保存', '取消'],
+                                        shade: [0.8, '#FFF'],
+                                        offset: 'auto',
+                                        area: ['300px', '500px'],
+                                        zIndex: 2,
+                                        resize: true,
+                                        /* maxmin: true,*/
+                                        yes: function (index) {
+                                           //保存权限的修改
+                                            var perIdList = new Array();
+                                            var treeObj = $.fn.zTree.getZTreeObj("permissionTree");
+                                            var nodes = treeObj.getCheckedNodes(true);
+                                            for(var i=0 ; i<nodes.length ; i++){
+                                                var node = nodes[i];
+                                                var perId = node.id;
+                                                perIdList.push(perId);
+                                            }
+                                            var requestData = {
+                                                roleId:roleId,
+                                                permissionIdList:perIdList
+                                            };
+                                            requestData = JSON.stringify(requestData);
+                                            var updateIndex = layer.load(2, {time: 10 * 1000});
+                                            _role.updateRolePermission(
+                                                requestData,
+                                                function () {
+                                                    layer.close(updateIndex);
+                                                    layer.close(boxIndex);
+                                                    layer.msg('权限更新成功');
+                                            },
+                                                function (errorMsg) {
+                                                    layer.close(updateIndex);
+                                                    layer.msg('' + errorMsg);
+                                            })
+                                        },
+                                        full: function (elem) {
+                                            var win = window.top === window.self ? window : parent.window;
+                                            $(win).on('resize', function () {
+                                                var $this = $(this);
+                                                elem.width($this.width()).height($this.height()).css({
+                                                    top: 0,
+                                                    left: 0
+                                                });
+                                                elem.children('div.layui-layer-content').height($this.height() - 95);
+                                            });
+                                        },
+                                        success: function (layero, index) {
+                                            //填充数据
+                                            var inflateIndex = layer.load(2, {time: 10 * 1000});
+                                            //获取角色对应的权限信息并填充ztree
+                                            _role.getAllPermissionById(roleId ,
+                                                function (res) {
+                                                var zNodes = res;
+                                                $.fn.zTree.init($("#permissionTree"), setting, zNodes);
+                                                setCheck();
+                                                layer.close(inflateIndex);
+                                            },
+                                                function (errorMsg) {
+                                                    layer.close(inflateIndex);
+                                                    layer.msg('' + errorMsg);
+                                                });
+                                            //弹出窗口成功后渲染表单
+                                            var form = layui.form();
+                                            form.render();
+
+                                        },
+                                        end: function () {
+                                            boxIndex = -1;
+                                        }
+                                    });
+                                });
+                                break;
                             //---编辑角色
                             case 'edit':
                                 var handlingIndex;
                                 $.get('../view/role-edit.html', null, function (form) {
-                                    addBoxIndex = layer.open({
+                                    boxIndex = layer.open({
                                         type: 1,
                                         title: '修改角色信息',
                                         content: form,
@@ -144,7 +225,7 @@ layui.use(['btable','paging', 'form'], function() {
                                                 _role.updateRole(JSON.stringify(data.field),
                                                     function () {
                                                         layer.msg("角色信息修改成功");
-                                                        layerTips.close(addBoxIndex);
+                                                        layerTips.close(boxIndex);
                                                         layer.close(handlingIndex);
                                                         location.reload(); //刷新
                                                     },
@@ -156,7 +237,7 @@ layui.use(['btable','paging', 'form'], function() {
                                             });
                                         },
                                         end: function () {
-                                            addBoxIndex = -1;
+                                            boxIndex = -1;
                                         }
                                     });
                                 });
@@ -220,14 +301,14 @@ layui.use(['btable','paging', 'form'], function() {
 
 
     //---添加角色
-    var addBoxIndex = -1;
+    var boxIndex = -1;
     $('#add').on('click', function () {
-        if (addBoxIndex !== -1)
+        if (boxIndex !== -1)
             return;
         //本表单通过ajax加载 --以模板的形式，当然你也可以直接写在页面上读取
         var handlingIndex;
         $.get('../view/role-add.html', null, function (form) {
-            addBoxIndex = layer.open({
+            boxIndex = layer.open({
                 type: 1,
                 title: '添加角色',
                 content: form,
@@ -263,7 +344,7 @@ layui.use(['btable','paging', 'form'], function() {
                         _role.addRole(JSON.stringify(data.field),
                             function () {
                                 layer.msg('添加角色成功');
-                                layerTips.close(addBoxIndex);
+                                layerTips.close(boxIndex);
                                 layerTips.close(handlingIndex);
                                 location.reload(); //刷新
                             },
@@ -275,10 +356,28 @@ layui.use(['btable','paging', 'form'], function() {
                     });
                 },
                 end: function () {
-                    addBoxIndex = -1;
+                    boxIndex = -1;
                 }
             });
         });
     });
+
+
+    /*初始化树形菜单*/
+    var setting = {
+        check: {
+            enable: true
+        },
+        data: {
+            simpleData: {
+                enable: true
+            }
+        }
+    };
+    function setCheck() {
+        var zTree = $.fn.zTree.getZTreeObj("permissionTree"),
+            type = {"Y": "ps", "N": "ps"};
+        zTree.setting.check.chkboxType = type;
+    }
 
 });

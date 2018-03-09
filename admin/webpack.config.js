@@ -78,8 +78,7 @@ var config = {
         new ExtractTextPlugin("css/[name].css"),
         //把指定文件夹下的文件复制到指定的目录
         new CopyWebpackPlugin([
-            { from: __dirname+'/src/utils/plugin/layui',to: 'plugin/layui' },
-
+            { from: __dirname+'/src/utils/plugin',to: 'plugin' }
         ]),
         // html模板的处理
         new HtmlWebpackPlugin(getHtmlConfig('index', '后台管理')),
@@ -87,9 +86,11 @@ var config = {
         new HtmlWebpackPlugin(getHtmlConfig('user-list', '用户信息管理')),
         new HtmlWebpackPlugin(getHtmlConfig('user-add', '添加用户')),
         new HtmlWebpackPlugin(getHtmlConfig('user-edit', '修改用户')),
+        new HtmlWebpackPlugin(getHtmlConfig('user-add-role', '分配角色')),
         new HtmlWebpackPlugin(getHtmlConfig('role-list', '角色信息管理')),
         new HtmlWebpackPlugin(getHtmlConfig('role-add', '添加角色')),
         new HtmlWebpackPlugin(getHtmlConfig('role-edit', '修改角色')),
+        new HtmlWebpackPlugin(getHtmlConfig('role-permission-assignment', '权限分配')),
         new HtmlWebpackPlugin(getHtmlConfig('permission-list', '权限信息管理')),
         new HtmlWebpackPlugin(getHtmlConfig('permission-add', '添加权限')),
         new HtmlWebpackPlugin(getHtmlConfig('permission-edit', '修改权限')),

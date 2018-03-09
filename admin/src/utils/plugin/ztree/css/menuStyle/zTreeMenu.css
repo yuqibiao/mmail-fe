@@ -1,0 +1,100 @@
+
+.ztree {
+    background-color: #2E363F;
+}
+
+.ztree li ul {
+    margin: 0;
+    padding: 0;
+}
+
+.ztree li {
+    line-height: 40px;
+}
+
+.ztree li a.level0 {
+    border-top: 1px solid #37414b;
+    border-bottom: 1px solid #1f262d;
+}
+
+.ztree li a.level1 {
+    background: #333
+}
+
+.ztree li a {
+    width: 210px;
+    height: 40px;
+    padding-top: 0px;
+    color: #999;
+}
+
+.ztree li a:hover {
+    text-decoration: none;
+    background-color: #27A9E3;
+    color: #fff;
+}
+
+.ztree li a span.button.switch {
+    visibility: hidden
+}
+
+.ztree.showIcon li a span.button.switch {
+    visibility: visible
+}
+
+.ztree li a.curSelectedNode {
+    border: 0;
+    height: 40px;
+    color: #fff;
+    background: url("./menu-active.png") no-repeat right center;
+    background-color: #28b779;
+    text-decoration: none;
+}
+
+.ztree li span {
+    line-height: 40px;
+}
+
+.ztree li span.button {
+    margin-top: -7px;
+}
+
+.ztree li span.button.switch {
+    width: 16px;
+    height: 16px;
+}
+
+.ztree li span.button {
+    background-image: url("./left_menuForOutLook.png");
+    *background-image: url("./left_menuForOutLook.gif")
+}
+
+.ztree li span.button.switch.level0 {
+    width: 32px;
+    height: 32px;
+}
+
+.ztree li span.button.switch.level1 {
+    width: 20px;
+    height: 20px
+}
+
+.ztree li span.button.noline_open {
+    background-position: 0 0;
+}
+
+.ztree li span.button.noline_close {
+    background-position: -18px 0;
+}
+
+.ztree li span.button.noline_open.level0 {
+    background: url("./menu_open.png") no-repeat;
+    margin-top: 12px;
+    margin-left: 5px;
+}
+
+.ztree li span.button.noline_close.level0 {
+    background: url("./menu_colse.png") no-repeat;
+    margin-top: 12px;
+    margin-left: 5px;
+}
