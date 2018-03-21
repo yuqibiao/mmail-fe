@@ -36,6 +36,7 @@ var config = {
         'permission-list': ['./src/page/permission-list/permission-list.js'],
         'product-category-list': ['./src/page/product-category-list/product-category-list.js'],
         'product-list': ['./src/page/product-list/product-list.js'],
+        'product-add': ['./src/page/product-list/product-add.js'],
     },
     output: {
         path: './dist',
@@ -97,7 +98,11 @@ var config = {
         new HtmlWebpackPlugin(getHtmlConfig('permission/permission-add', '添加权限')),
         new HtmlWebpackPlugin(getHtmlConfig('permission/permission-edit', '修改权限')),
         new HtmlWebpackPlugin(getHtmlConfig('product-category/product-category-list', '商品分类管理')),
+        new HtmlWebpackPlugin(getHtmlConfig('product-category/product-category-add', '添加商品分类')),
+        new HtmlWebpackPlugin(getHtmlConfig('product-category/product-category-edit', '编辑商品分类')),
         new HtmlWebpackPlugin(getHtmlConfig('product/product-list', '商品信息管理')),
+        new HtmlWebpackPlugin(getHtmlConfig('product/product-add', '商品添加')),
+        new HtmlWebpackPlugin(getHtmlConfig('product/product-edit', '商品编辑')),
     ]
 };
 

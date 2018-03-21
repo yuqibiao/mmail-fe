@@ -1,6 +1,8 @@
 <div style="margin: 15px;">
     <form class="layui-form">
 
+        <input type="hidden" name="categoryId" id="categoryId">
+
         <div class="layui-form-item">
             <label class="layui-form-label">父级分类</label>
             <div class="layui-input-block">
@@ -15,17 +17,17 @@
         <div class="layui-form-item">
             <label class="layui-form-label">分类名称</label>
             <div class="layui-input-block">
-                <input type="text" name="name" lay-verify="required" placeholder="请输入权限名" autocomplete="off"
-                       class="layui-input" value="：1">
+                <input type="text"  id="name" name="name" lay-verify="required" placeholder="请输入权限名" autocomplete="off"
+                       class="layui-input" value="">
             </div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">序列号</label>
             <div class="layui-input-block">
-                <input type="text" name="code"  placeholder="请输入序列号" autocomplete="off"
-                       class="layui-input" value="1">
+                <input type="text" id="code" name="code"  placeholder="请输入序列号" autocomplete="off"
+                       class="layui-input" value="">
             </div>
         </div>
-        <button lay-filter="addProductCategory" lay-submit style="display: none;"></button>
+        <button lay-filter="editProductCategory" lay-submit style="display: none;"></button>
     </form>
 </div>

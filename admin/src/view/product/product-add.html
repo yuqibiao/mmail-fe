@@ -1,58 +1,75 @@
-<div style="margin: 15px;">
-    <form class="layui-form">
-        <div class="layui-form-item">
-            <label class="layui-form-label">输入框</label>
-            <div class="layui-input-block">
-                <input type="text" name="" placeholder="请输入" autocomplete="off" class="layui-input">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>商品管理</title>
+    <%= require('html-loader!../common/head-common.html') %>
+</head>
+<body>
+
+<form class="layui-form">
+
+    <input id="productId" type="hidden" name="productId">
+
+    <div class="layui-form-item" style="margin-top: 20px">
+        <label class="layui-form-label">商品名称</label>
+        <div class="layui-input-inline">
+            <input type="text" id="name" name="name" class="layui-input newsName" lay-verify="required" placeholder="请输入商品名称">
+        </div>
+        <label class="layui-form-label">商品主图</label>
+        <div class="layui-input-inline">
+            <input type="file" name="file" lay-ext="gif|png|jpg"   lay-type="file" lay-title="上传商品的主图" class="layui-upload-file">
+        </div>
+        <input type="hidden" name="mainImage" id="mainImage"lay-verify="required">
+        <div class="layui-input-inline">
+        <img id="main-img-thumb" height="40px">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">商品价格</label>
+        <div class="layui-input-inline">
+            <input type="text" name="price" id="price" placeholder="￥" lay-verify="number" autocomplete="off" class="layui-input">
+        </div>
+        <label class="layui-form-label">库存</label>
+        <div class="layui-input-inline" style="width: 100px;">
+            <input type="text" required id="stock" name="stock" autocomplete="off" placeholder="库存数" lay-verify="number" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">商品分类</label>
+        <div class="layui-input-block">
+            <input type="text" id="categoryValue"  lay-verify="required"
+                   placeholder="请选择商品所属分类" autocomplete="off" class="layui-input" value="1">
+            <input type="hidden" name="categoryId" id="categoryId">
+            <div id="menuContent" class="menuContent" >
+                <ul id="categoryValueTree" class="ztree" style="margin-top:0;"></ul>
             </div>
         </div>
-        <div class="layui-form-item">
-            <label class="layui-form-label">密码框</label>
-            <div class="layui-input-inline">
-                <input type="password" name="password" required lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input">
-            </div>
-            <div class="layui-form-mid layui-word-aux">辅助文字</div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">商品简介</label>
+        <div class="layui-input-block">
+            <textarea placeholder="请输入商品的简介" id="subtitle" name="subtitle" class="layui-textarea"></textarea>
         </div>
-        <div class="layui-form-item">
-            <label class="layui-form-label">选择框</label>
-            <div class="layui-input-block">
-                <select name="city" lay-verify="required">
-                    <option value=""></option>
-                    <option value="0">北京</option>
-                    <option value="1">上海</option>
-                    <option value="2">广州</option>
-                    <option value="3">深圳</option>
-                    <option value="4">杭州</option>
-                </select>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">商品详情</label>
+        <div class="layui-input-block">
+            <div id="product-detail">
             </div>
         </div>
-        <div class="layui-form-item">
-            <label class="layui-form-label">复选框</label>
-            <div class="layui-input-block">
-                <input type="checkbox" name="like[write]" title="写作">
-                <input type="checkbox" name="like[read]" title="阅读" checked>
-                <input type="checkbox" name="like[dai]" title="发呆">
-            </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn" lay-submit lay-filter="addProduct">立即提交</button>
+            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
         </div>
-        <div class="layui-form-item">
-            <label class="layui-form-label">开关</label>
-            <div class="layui-input-block">
-                <input type="checkbox" name="switch" lay-skin="switch">
-            </div>
-        </div>
-        <div class="layui-form-item">
-            <label class="layui-form-label">单选框</label>
-            <div class="layui-input-block">
-                <input type="radio" name="sex" value="男" title="男">
-                <input type="radio" name="sex" value="女" title="女" checked>
-            </div>
-        </div>
-        <div class="layui-form-item layui-form-text">
-            <label class="layui-form-label">文本域</label>
-            <div class="layui-input-block">
-                <textarea name="desc" placeholder="请输入内容" class="layui-textarea"></textarea>
-            </div>
-        </div>
-        <button lay-filter="edit" lay-submit style="display: none;"></button>
-    </form>
-</div>
+    </div>
+</form>
+
+<script type="text/javascript" src="//unpkg.com/wangeditor/release/wangEditor.min.js"></script>
+<%= require('html-loader!../common/footer.html') %>
+</body>
+</html>

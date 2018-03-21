@@ -296,7 +296,7 @@ layui.use(['btable','form'], function () {
     $('#deleteSelected').on('click', function () {
 
         btable.getSelections(function (data) {
-            layer.msg("选中的Id有：" + data.ids);
+            //layer.msg("选中的Id有：" + data.ids);
             var count = data.count;
             var ids = data.ids;
             layer.confirm('确定要删除选中的  <span style="color:red; font-size: 13px">' + count + '</span>  条数据?', {icon: 3, title: '操作提示'}, function (index) {

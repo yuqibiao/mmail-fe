@@ -58,7 +58,7 @@ var _role = {
      */
     getRoleById:function(roleId , resolve , reject){
         _mm.request({
-            url: _mm.getServerUrl("/api/user/v1/roles/" + roleId),
+            url: _mm.getServerUrl("/api/role/v1/roles/" + roleId),
             success: resolve,
             error: reject
         });
@@ -74,7 +74,7 @@ var _role = {
     updateRole:function(roleInfo , resolve , reject){
         _mm.request({
             type : 'patch',
-            url:_mm.getServerUrl("/api/user/v1/roles"),
+            url:_mm.getServerUrl("/api/role/v1/roles"),
             data:roleInfo,
             contentType : "application/json",
             success:resolve,

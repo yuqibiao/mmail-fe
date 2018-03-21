@@ -35,6 +35,10 @@ layui.use(['btable','paging', 'form'], function() {
                 field: 'name', //字段名
                 sortable: true//是否显示排序
             },
+            { //配置数据列
+                fieldName: '角色别名',
+                field: 'alias'
+            },
             {
                 fieldName: '序列号',
                 field: 'code',
@@ -204,6 +208,7 @@ layui.use(['btable','paging', 'form'], function() {
                                                     var role = res;
                                                     $("#roleId").val("" + role.roleId);
                                                     $("#name").val("" + role.name);
+                                                    $("#alias").val("" + role.alias);
                                                     $("#description").val("" + role.description);
                                                     $("#code").val("" + role.code);
                                                     var statusVal = role.status;
@@ -220,12 +225,12 @@ layui.use(['btable','paging', 'form'], function() {
                                             var form = layui.form();
                                             form.render();
                                             //表单提交
-                                            form.on('submit(editUser)', function (data) {
+                                            form.on('submit(editRole)', function (data) {
                                                 handlingIndex = layer.load(2, {time: 10 * 1000});
                                                 _role.updateRole(JSON.stringify(data.field),
                                                     function () {
                                                         layer.msg("角色信息修改成功");
-                                                        layerTips.close(boxIndex);
+                                                        layer.close(boxIndex);
                                                         layer.close(handlingIndex);
                                                         location.reload(); //刷新
                                                     },

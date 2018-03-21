@@ -4,24 +4,30 @@
         <div class="layui-form-item">
             <label class="layui-form-label">角色名</label>
             <div class="layui-input-block">
-                <input type="text" name="name" lay-verify="required"placeholder="请输入角色名" autocomplete="off" class="layui-input" value="角色：1">
+                <input type="text" id="name" name="name" lay-verify="required"placeholder="请输入角色名" autocomplete="off" class="layui-input" value="角色：1">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">角色别名</label>
+            <div class="layui-input-block">
+                <input type="text" id="alias" name="alias" lay-verify="required"placeholder="请输入角色名" autocomplete="off" class="layui-input" value="角色：1">
             </div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">角色描述</label>
             <div class="layui-input-block">
-                <input type="text" name="description" placeholder="请输入角色描述" autocomplete="off" class="layui-input" value="权限描述bababababalalalala">
+                <input type="text" id="description" name="description" placeholder="请输入角色描述" autocomplete="off" class="layui-input" value="权限描述bababababalalalala">
             </div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">序列号</label>
             <div class="layui-input-block">
-                <input type="text" name="code" lay-verify="required"placeholder="请输入序列号" autocomplete="off" class="layui-input" value="1">
+                <input type="text" id="code" name="code" lay-verify="required"placeholder="请输入序列号" autocomplete="off" class="layui-input" value="1">
             </div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">状态</label>
-            <div class="layui-input-block">
+            <div class="layui-input-block" id="status">
                 <input type="radio" name="status" value="0" title="可用" checked>
                 <input type="radio" name="status" value="1" title="不可用">
             </div>

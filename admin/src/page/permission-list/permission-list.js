@@ -50,6 +50,10 @@ layui.use(['btable','form'], function() {
                 sortable: true
             },
             {
+                fieldName: '别名',
+                field: 'alias'
+            },
+            {
                 fieldName: '描述',
                 field: 'description'
             },
@@ -178,6 +182,7 @@ layui.use(['btable','form'], function() {
                                                             });
                                                     });
                                                     $("#name").val("" + permission.name);
+                                                    $("#alias").val("" + permission.alias);
                                                     $("#description").val("" + permission.description);
                                                     $("#code").val("" + permission.code);
                                                     $("#target").val("" + permission.target);
