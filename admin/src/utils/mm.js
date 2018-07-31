@@ -6,9 +6,9 @@
 */
 
 'use strict';
-var Hogan = require('hogan');
+var Hogan = require('hogan.js');
 var conf = {
-    serverHost : ''
+    serverHost : 'http://localhost:8080/mmall'
 };
 var _mm = {
     // 网络请求
@@ -17,6 +17,9 @@ var _mm = {
         $.ajax({
             type        : param.type  || 'get',
             url         : param.url     || '',
+            xhrFields: {
+                withCredentials: true
+            },
             dataType    : param.dataType    || 'json',
             contentType : param.contentType||'application/x-www-form-urlencoded',
             data        : param.data    || '',
@@ -28,11 +31,15 @@ var _mm = {
                 // 没有登录状态，需要强制登录
                 else if(10 === res.code){
                     _this.doLogin();
+                }else if(1004==res.code){
+                    _this.doLogin();
                 }
                 // 请求数据错误
                 else if(500 === res.code){
                     //window.alert("错误："+res.msg);
                     typeof param.error === 'function' && param.error(res.msg);
+                }else{
+                    typeof param.error === 'function' && param.error("错误码："+res.code+"  异常："+res.msg)
                 }
             },
             error       : function(err){

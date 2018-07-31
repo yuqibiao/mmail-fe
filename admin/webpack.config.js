@@ -61,15 +61,15 @@ var config = {
             service: __dirname + '/src/service',
         }
     },
-    devServer: {
+    devServer: {//接口代理
         port: 8088,
-        proxy: {
+      /*  proxy: {
             '/api': {
                 target: 'http://localhost:8080/',
                 pathRewrite: {'^/api' : '/mmall/api'},
                 changeOrigin: true
             }
-        }
+        }*/
     },
     plugins: [
         // 独立通用模块到js/base.js

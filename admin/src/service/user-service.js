@@ -10,6 +10,35 @@ var _mm = require("utils/mm.js");
 var _user = {
 
     /**
+     * 生成验证码
+     *
+     * @param path
+     * @returns {*}
+     */
+    generateValidateCode : function(path){
+        return _mm.getServerUrl("/api/validateCode/generate");
+    },
+
+    /**
+     * 登录
+     *
+     * @param username
+     * @param pwd
+     * @param code
+     * @param resolve
+     * @param reject
+     */
+    login:function(username , pwd , code , resolve , reject){
+        _mm.request({
+            type : 'post',
+            url:_mm.getServerUrl("/api/user/v1/user/login"),
+            data:{username:username , pwd:pwd , code:code},
+            success:resolve,
+            error:reject
+        });
+    },
+
+    /**
      * 批量删除用户
      *
      * @param userIdList
